@@ -33,7 +33,7 @@ exports.submitUser = (req, res) => {
                 return userModel.addUser( name, surname, email, hash, `/uploads/${fileName}`);
             })
             .then(() => {
-                res.redirect('/');
+                res.redirect('/homePage');
             })
             .catch(err => {
                 console.log(err);
