@@ -5,7 +5,7 @@ const authenticationService = require('../services/authentication');
 const userModel = require('../models/indexModel');
 // GET route for rendering the index page
 router.get('/', indexController.getIndexPage);
-router.get('/currentUser', authenticationService.authenticateJWT, (req, res, next) => {
+router.get('/user', authenticationService.authenticateJWT, (req, res, next) => {
     userModel.getUser(req.user.id)
         .then(user => res.render('user', {user}))
         .catch(error => {
