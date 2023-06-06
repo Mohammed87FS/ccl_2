@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const indexController = require('../controllers/indexController');
-
+const authenticationService = require('../services/authentication');
+const userModel = require('../models/indexModel');
 // GET route for rendering the index page
 router.get('/', indexController.getIndexPage);
-router.get('/user', indexController.getUsersPage);
+router.get('/currentUser', authenticationService.authenticateJWT, (req, res, next) => {
+    userModel.getUser(req.user.id)
+        .then(user => res.render('user', {user}))
+        .catch(error => {
+            res.status(404)
+            next(error);
+        })
+});
+
+router.get('/users', indexController.getUsersPage);
 
 
 router.route('/homePage')
@@ -18,7 +28,7 @@ router.route('/login')
         res.render('login');
     })
     .post((req, res, next) => {
-        userModel.getUsers()
+        userModel.getAllUsers()
             .then((users) => {
                 authenticationService.authenticateUser(req.body, users, res)
             })

@@ -11,14 +11,17 @@ async function authenticateUser({email, password}, users, res){
         return u.email === email;
     });
 
-    if (user && await checkPassword(password, user.password)) {
+    if (user && password && await checkPassword(password, user.password)) {
         const accessToken = jwt.sign({ id: user.id, name: user.name }, ACCESS_TOKEN_SECRET, { expiresIn: '30m'});
         res.cookie('accessToken', accessToken);
+
         res.redirect('/');
     } else {
         res.send('Username or password incorrect');
     }
 }
+
+
 
 function authenticateJWT(req, res, next) {
     const token = req.cookies['accessToken'];
@@ -28,7 +31,6 @@ function authenticateJWT(req, res, next) {
             if (err) {
                 return res.sendStatus(403);
             }
-            //console.log(user)
             req.user = user;
             next();
         });
@@ -36,6 +38,7 @@ function authenticateJWT(req, res, next) {
         res.sendStatus(401);
     }
 }
+
 
 module.exports = {
     authenticateUser,

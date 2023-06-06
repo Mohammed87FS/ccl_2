@@ -25,3 +25,15 @@ exports.getAllUsers = () => {
         });
     });
 };
+
+exports.getUser = user_id => new Promise((resolve, reject) => {
+    const sql = "SELECT * FROM gymBros WHERE id = ?";
+    db.config.query(sql, [user_id], function (err, user, fields) {
+        if (err) {
+            reject(err);
+        } else {
+            resolve(user[0]);
+        }
+    })
+});
+

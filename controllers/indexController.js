@@ -59,10 +59,21 @@ exports.getIndexPage = (req, res) => {
 exports.getUsersPage = (req, res) => {
     userModel.getAllUsers()
         .then(users => {
-            res.render('user', { users });
+            res.render('users', { users });
         })
         .catch(err => {
             console.log(err);
             res.status(500).send('Internal Server Error');
         });
+};
+
+exports.getUser=(req, res, next) =>{
+
+
+    userModel.getUser(parseInt(req.params.id))
+        .then(user => res.render('user', {user}))
+        .catch(error => {
+            res.status(404)
+            next(error);
+        })
 };
