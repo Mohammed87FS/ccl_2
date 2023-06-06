@@ -2,25 +2,30 @@
 <html>
 <head>
     <title>Login Form</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<h2>Login Form</h2>
+<div class="container">
+    <h2 class="form-title">Login Form</h2>
 
-<form action="/login" method="post">
-    <div class="container">
-        <label for="name"><b>Name</b></label>
-        <input type="text" placeholder="Enter Username" name="name" required>
+    <form action="/login" method="post" class="form">
+        <div class="form-group">
+            <label for="name" class="form-label"><b>Name</b></label>
+            <input type="text" placeholder="Enter Username" name="name" required class="form-input">
+        </div>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <div class="form-group">
+            <label for="psw" class="form-label"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required class="form-input">
+        </div>
 
-        <button type="submit">Login</button>
-    </div>
+        <button type="submit" class="form-button">Login</button>
 
-    <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-</form>
+        <div class="form-footer">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
 </body>
 </html>

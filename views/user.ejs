@@ -1,12 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title> User: <%= user.name + " " + user.surname %> </title>
+    <!-- <link rel="stylesheet" href="/style.css"/> -->
+    <link rel="stylesheet" href="/output.css"/>
+
+    <!-- Bootstrap -->
+
+    <script>
+        function forwardToEditUserPage() {
+            window.location = <%= user.id %> + '/edit';
+        }
+
+        //TODO: How would we do that with the actual "delete-method" or is that fine?
+        function deleteUser() {
+            let confirmation = confirm("Are you sure you want to delete this user?");
+            if(confirmation) {
+                window.location = <%= user.id %> + '/delete';
+            }
+        }
+    </script>
+
 </head>
-<body>
-<h1> hello user</h1>
+<body >
+<nav >
+    <a href="../" >LocalDoctor</a>
+    <div >
+        <a href="#" >Blog</a>
+        <a href="../../users" >Users</a>
+        <a href="../../users/profile" >Profile</a>
+        <a href="../login" >Login</a>
+        <a href="../logout" >Logout</a>
+    </div>
+</nav>
+
+<div >
+
+    <!-- card div -->
+    <div >
+        <% var userKeys = Object.keys(user); %>
+        <ul>
+            <% for (var i = 0; i < userKeys.length; i++) { %>
+                <% if (userKeys[i] !== "password") { %>
+                    <li>
+                        <% if (userKeys[i] === "picture"){ %>
+                            <img src="<%= user.picture %>" alt="Picture" class="rounded-lg shadow-md">
+                        <% } else { %>
+                            <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
+                        <% } %>
+                    </li>
+                <% } %>
+            <% } %>
+        </ul>
+
+        <div >
+            <button type="submit" value="submit" onclick="forwardToEditUserPage()" c>Edit</button>
+            <button type="submit" value="submit" onclick="deleteUser()" >Delete</button>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

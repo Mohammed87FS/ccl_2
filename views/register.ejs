@@ -1,38 +1,31 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Word List</title>
+    <title>Register</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <div class="container">
+    <form action="/submitUser" method="post" enctype="multipart/form-data" class="form">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" name="name" id="name" required class="form-input">
 
+        <label for="surname" class="form-label">Surname:</label>
+        <input type="text" name="surname" id="surname" required class="form-input">
 
-    <form action="/submitUser" method="post" enctype="multipart/form-data">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" name="email" id="email" required class="form-input">
 
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" name="password" id="password" required class="form-input">
 
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+        <label for="picture" class="form-label">Picture:</label>
+        <input type="file" name="picture" id="picture" accept="image/*" required class="form-input">
 
-        <label for="surname">Surname:</label>
-        <input type="text" name="surname" id="surname" required>
-
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-
-
-
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-
-        <label for="picture">Picture:</label>
-        <input type="file" name="picture" id="picture" accept="image/*" required>
-
-        <button type="submit">Submit User</button>
+        <button type="submit" class="form-button">Submit User</button>
     </form>
-
-
 </div>
 </body>
 </html>
