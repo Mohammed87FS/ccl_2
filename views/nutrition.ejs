@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nutrition Information</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Nutrition Information</h1>
+
+<% if (data) { %>
+    <div>
+        <h2>Calories: <%= data.calories %></h2>
+        <h3>Diet Labels:</h3>
+        <ul>
+            <% data.dietLabels.forEach(label => { %>
+                <li><%= label %></li>
+            <% }); %>
+        </ul>
+        <h3>Health Labels:</h3>
+        <ul>
+            <% data.healthLabels.forEach(label => { %>
+                <li><%= label %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } else { %>
+    <p>No nutrition data available.</p>
+<% } %>
+</body>
+</html>

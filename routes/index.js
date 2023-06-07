@@ -16,10 +16,28 @@ router.get('/user', authenticationService.authenticateJWT, (req, res, next) => {
 
 router.get('/users', indexController.getUsersPage);
 
+//router.get('/nutritionPage', indexController.getNutritionPage);
+
+// ...
+
+// POST route for getting  router.route('/nutrition')
+//     .get((req, res, next) => {
+//         res.render('nutrition');
+//     }); nutrition details
+
+router.post('/getNutritionDetails', indexController.getNutritionDetails);
+
+// ...
 
 router.route('/homePage')
     .get((req, res, next) => {
         res.render('homePage');
+    });
+
+
+router.route('/inputFood')
+    .get((req, res, next) => {
+        res.render('inputFood');
     });
 
 

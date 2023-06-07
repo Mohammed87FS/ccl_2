@@ -7,6 +7,41 @@ const uuid = require('uuid');
 const userModel = require('../models/indexModel');
 const bcrypt = require('bcrypt');
 
+const fetch = require('node-fetch');
+
+// ...
+
+require('dotenv').config()
+
+exports.getNutritionDetails = async (req, res) => {
+    try {
+        const { title, ingr } = req.body;
+
+        // Convert string of ingredients to an array
+        const ingredients = ingr.split('\n');
+
+        const response = await fetch(`https://api.edamam.com/api/nutrition-details?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, ingr: ingredients })
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+
+        res.render('nutrition', { data }); // render data in a 'nutrition' view
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+
 // ...
 
 exports.submitUser = (req, res) => {
@@ -53,6 +88,8 @@ exports.getIndexPage = (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 };
+
+
 
 
 

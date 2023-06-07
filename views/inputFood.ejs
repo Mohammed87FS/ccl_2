@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Food Items</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Enter Food Items</h1>
+
+<form action="/getNutritionDetails" method="POST">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br>
+
+    <label for="ingr">Ingredients:</label><br>
+    <textarea id="ingr" name="ingr" rows="4" cols="50" required></textarea><br>
+    <small>Enter each ingredient on a new line.</small><br>
+
+    <input type="submit" value="Get Nutrition Details">
+</form>
+</body>
+</html>
