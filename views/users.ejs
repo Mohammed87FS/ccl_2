@@ -1,55 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All users</title>
-    <link rel="stylesheet" href="/users.css"/>
+    <link rel="stylesheet" href="/styles.css">
 </head>
-<body >
+<body>
+<!-- Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Tracker</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-
-
-<div >
+<!-- Users Information -->
+<div>
     <% if (users.length > 0) { %>
-
         <% users.forEach(user => { %>
-
             <!-- card div -->
-            <div >
-
-                <div >
-
+            <div>
+                <div>
                     <!-- image div -->
-                    <div >
-                        <img src="<%= user.picture %>" >
+                    <div>
+                        <img src="<%= user.picture %>">
                     </div>
 
-                    <div >
-                        <div >
-                            <div >name:</div>
-                            <p ><%= user.name %></p>
+                    <div>
+                        <div>
+                            <div>name:</div>
+                            <p><%= user.name %></p>
                         </div>
 
-                        <div >
-                            <span >surname:</span>
-                            <p ><%= user.surname %></p>
+                        <div>
+                            <span>surname:</span>
+                            <p><%= user.surname %></p>
                         </div>
 
-                        <div >
-                            <span >email:</span>
-                            <p ><%= user.email %></p>
+                        <div>
+                            <span>email:</span>
+                            <p><%= user.email %></p>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="actions flex items-center">
-                    <a href="/users/<%= user.id %>/view">View</a>
-                    <a href="/users/<%= user.id %>/edit">Edit</a>
-                    <a href="/users/<%= user.id %>/delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                    <a href="/user/<%= user.id %>">View</a>
+                    <a href="/user/<%= user.id %>/edit">Edit</a>
+                    <form action="/user/<%= user.id %>/delete" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
                 </div>
             </div>
         <% }) %>
+    <% } else { %>
+        <p>No users found</p>
     <% } %>
 </div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2023 Fitness Tracker. All rights reserved.</p>
+</footer>
 </body>
 </html>

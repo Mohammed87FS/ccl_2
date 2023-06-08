@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<!-- Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Tracker</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Login Form -->
 <div class="container">
-    <h2 class="form-title">Login Form</h2>
 
 
     <form action="/login" method="post" class="form">
-
+        <h2 class="form-title">Login Form</h2>
         <div class="form-group">
             <label for="email" class="form-label"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" required class="form-input">
@@ -19,7 +33,6 @@
         <div class="form-group">
             <label for="psw" class="form-label"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required class="form-input">
-
         </div>
 
         <button type="submit" class="form-button">Login</button>
@@ -30,5 +43,10 @@
         </div>
     </form>
 </div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2023 Fitness Tracker. All rights reserved.</p>
+</footer>
 </body>
 </html>

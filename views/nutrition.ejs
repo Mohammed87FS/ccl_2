@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrition Information</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<!-- Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Tracker</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Nutrition Information -->
 <h1>Nutrition Information</h1>
 
 <% if (data) { %>
@@ -26,5 +41,10 @@
 <% } else { %>
     <p>No nutrition data available.</p>
 <% } %>
+
+<!-- Footer -->
+<footer>
+    <p>© 2023 Fitness Tracker. All rights reserved.</p>
+</footer>
 </body>
 </html>

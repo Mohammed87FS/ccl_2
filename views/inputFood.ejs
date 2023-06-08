@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter Food Items</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<h1>Enter Food Items</h1>
+<!-- Navigation -->
+<header>
+    <nav>
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Tracker</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Enter Food Items Form -->
+
 
 <form action="/getNutritionDetails" method="POST">
+    <h1>Enter Food Items</h1>
     <label for="title">Title:</label><br>
     <input type="text" id="title" name="title" required><br>
 
     <label for="ingr">Ingredients:</label><br>
     <textarea id="ingr" name="ingr" rows="4" cols="50" required></textarea><br>
-    <small>Enter each ingredient on a new line.</small><br>
+    <small>Enter each ingredient on a new line. Be specific about the quantity and size, for example: "1 large apple" or "100g chicken breast".</small><br>
 
     <input type="submit" value="Get Nutrition Details">
 </form>
+
+<!-- Footer -->
+<footer>
+    <p>© 2023 Fitness Tracker. All rights reserved.</p>
+</footer>
 </body>
 </html>
