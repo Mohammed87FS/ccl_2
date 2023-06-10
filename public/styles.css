@@ -24,7 +24,7 @@ header {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: left;
+    justify-content: right;
     padding: 10px;
 }
 
@@ -84,8 +84,19 @@ form button {
     text-align: center;
 }
 
+.cansl{
+    background-color: #ffffff;
+    color: #000000;
+    border: #243272 solid 2px;
+    padding: 12px 14px;
+}
+
 form button:hover {
     background-color: #243242;
+}
+.cansl:hover {
+    background-color: #243242;
+    color: #ffffff;
 }
 
 /* Tables */
@@ -112,8 +123,7 @@ footer {
     color: white;
     text-align: center;
     padding: 1em;
-    position: absolute;
-    bottom: 0;
+    position: relative;  /* Changed from absolute to relative */
     width: 100%;
 }
 
@@ -121,11 +131,19 @@ footer {
 @media screen and (max-width: 768px) {
     nav ul {
         flex-direction: column;
+        padding: 20px 0; /* Increase padding */
     }
     nav ul li {
-        margin: 5px;
+        margin: 10px 0; /* Increase margin */
     }
     .container {
         padding: 10px;
+    }
+    form {
+        max-width: 90%; /* Allow the form to scale down on smaller screens */
+        padding: 20px; /* Decrease padding on smaller screens */
+    }
+    footer {
+        position: static; /* Let the footer flow naturally in the document */
     }
 }
