@@ -25,22 +25,15 @@ nav {
     align-items: center; /* Add this line */
 }
 
-
 #logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.5em; /* make it a bit bigger */
+    font-size: 1.1em;
     transition: color 0.3s ease;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* add some shadow */
-    border: 2px solid #fff; /* add border */
-    padding: 10px; /* add padding */
-    border-radius: 50px; /* make it rounded */
-    background-color: #243272; /* add some background color */
 }
 
 #logo a:hover {
-    color: #243272; /* change the text color on hover */
-    background-color: #fff; /* change the background color on hover */
+    color: #f4f4f4;
 }
 
 #nav-items ul {
@@ -75,9 +68,53 @@ main {
     padding: 0 15px;
 }
 
+.user-card {
+    background-image: linear-gradient(180deg, #243272 20%, #fff 20%);
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#user-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: #ffffff solid 5px;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.user-card ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+
+    width: 100%;
+}
+
+.user-card ul li {
+    margin-bottom: 10px;
+
+}
+@media screen and (max-width: 768px) {
+    /* ... other styles ... */
+
+    #user-picture {
+        width: 60px;
+        height: 60px;
+    }
+    .user-card ul {
+        width: 90%;
+    }
+}
 /* Forms */
 form {
-
     max-width: 500px;
     margin: 30px auto;
     background: #fff;
@@ -94,7 +131,7 @@ form input, form select, form textarea {
     border-radius: 4px;
 }
 
-form button {
+.edit {
     display: inline-block;
     background-color: #243272;
     color: white;
@@ -106,7 +143,7 @@ form button {
     text-align: center;
 }
 
-.cansl{
+.delete{
     background-color: #ffffff;
     color: #000000;
     border: #243272 solid 2px;
@@ -114,10 +151,10 @@ form button {
     border-radius: 4px;
 }
 
-form button:hover {
+.edit:hover {
     background-color: #243242;
 }
-.cansl:hover {
+.delete:hover {
     background-color: #243242;
     color: #ffffff;
 }
@@ -168,5 +205,12 @@ footer {
     }
     footer {
         position: static; /* Let the footer flow naturally in the document */
+    }
+    .user-card {
+        padding: 10px;
+    }
+    #user-picture {
+        width: 60px;
+        height: 60px;
     }
 }

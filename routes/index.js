@@ -4,7 +4,7 @@ const indexController = require('../controllers/indexController');
 const authenticationService = require('../services/authentication');
 const userModel = require('../models/indexModel');
 // GET route for rendering the index page
-router.get('/', indexController.getIndexPage);
+router.get('/register', indexController.getRegisterPage);
 router.get('/user', authenticationService.authenticateJWT, (req, res, next) => {
     userModel.getUser(req.user.id)
         .then(user => res.render('user', {user}))
@@ -29,7 +29,7 @@ router.post('/getNutritionDetails', indexController.getNutritionDetails);
 
 // ...
 
-router.route('/homePage')
+router.route('/')
     .get((req, res, next) => {
         res.render('homePage');
     });

@@ -4,51 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> User: <%= user.name + " " + user.surname %> </title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/user.css">
     <script src="/scripts.js"></script>
 </head>
 <body>
 <!-- Navigation -->
 <header>
     <nav>
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Tracker</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+        <div id="logo">
+            <a href="/">MyGymBro</a>
+        </div>
+        <div id="nav-items">
+            <ul>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="#">Goals</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </div>
     </nav>
 </header>
 
 <!-- User Information -->
+
+
+
 <div>
     <!-- card div -->
-    <div>
-        <% var userKeys = Object.keys(user); %>
+
+    <div class="user-card">
+
         <ul>
-            <% for (var i = 0; i < userKeys.length; i++) { %>
-                <% if (userKeys[i] !== "password") { %>
-                    <li>
-                        <% if (userKeys[i] === "picture"){ %>
-                            <img src="<%= user.picture %>" alt="Picture" class="rounded-lg shadow-md">
-                        <% } else { %>
-                            <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
-                        <% } %>
-                    </li>
+            <% var userKeys = Object.keys(user); %>
+            <img src="<%= user.picture %>" alt="User Picture" id="user-picture">
+            <ul>
+                <% for (var i = 0; i < userKeys.length; i++) { %>
+                    <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
+                        <li>
+                            <% if (userKeys[i] === "picture"){ %>
+
+                            <% } else { %>
+                                <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
+                            <% } %>
+                        </li>
+                    <% } %>
                 <% } %>
-            <% } %>
+            </ul>
         </ul>
 
         <div>
-            <button type="submit" value="submit" onclick="forwardToEditUserPage()">Edit</button>
-            <button type="submit" value="submit" onclick="deleteUser()">Delete</button>
+            <button class="edit" type="submit" value="submit" onclick="forwardToEditUserPage()">Edit</button>
+            <button class="delete" type="submit" value="submit" onclick="deleteUser()">Delete</button>
         </div>
     </div>
+
+
 </div>
 
 <!-- Footer -->
-<footer>
-    <p>© 2023 Fitness Tracker. All rights reserved.</p>
-</footer>
+
 </body>
 </html>

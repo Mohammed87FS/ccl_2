@@ -15,7 +15,7 @@ async function authenticateUser({email, password}, users, res){
         const accessToken = jwt.sign({ id: user.id, name: user.name }, ACCESS_TOKEN_SECRET, { expiresIn: '30m'});
         res.cookie('accessToken', accessToken);
 
-        res.redirect('/homePage');
+        res.redirect('/');
     } else {
         res.send('Username or password incorrect');
     }

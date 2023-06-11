@@ -78,7 +78,7 @@ exports.submitUser = (req, res) => {
 };
 
 
-exports.getIndexPage = (req, res) => {
+exports.getRegisterPage = (req, res) => {
     userModel.getAllUsers()
         .then(users => {
             res.render('register', { users });
