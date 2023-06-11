@@ -34,6 +34,11 @@ router.route('/')
         res.render('homePage');
     });
 
+router.route('/goals')
+    .get((req, res, next) => {
+        res.render('goals');
+    });
+router.get('/calculate', indexController.calculateBMI);
 
 router.route('/inputFood')
     .get((req, res, next) => {

@@ -37,3 +37,19 @@ exports.getUser = user_id => new Promise((resolve, reject) => {
     })
 });
 
+exports.calculateBMI = (weight, height) => {
+    let heightInMeters = height / 100;
+    return weight / (heightInMeters * heightInMeters);
+}
+
+exports.interpretBMI = (bmi) => {
+    if (bmi < 18.5) {
+        return 'Underweight';
+    } else if (bmi < 24.9) {
+        return 'Normal weight';
+    } else if (bmi < 29.9) {
+        return 'Overweight';
+    } else {
+        return 'Obesity';
+    }
+}

@@ -28,13 +28,20 @@ nav {
 #logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1.5em; /* make it a bit bigger */
     transition: color 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* add some shadow */
+    border: 2px solid #fff; /* add border */
+    padding: 10px; /* add padding */
+    border-radius: 50px; /* make it rounded */
+    background-color: #243272; /* add some background color */
 }
 
 #logo a:hover {
-    color: #f4f4f4;
+    color: #243272; /* change the text color on hover */
+    background-color: #fff; /* change the background color on hover */
 }
+
 
 #nav-items ul {
     display: flex;

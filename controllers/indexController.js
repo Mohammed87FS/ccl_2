@@ -4,7 +4,7 @@ const uuid = require('uuid');
 
 // In your controller
 
-const userModel = require('../models/indexModel');
+const indexModel = require('../models/indexModel');
 const bcrypt = require('bcrypt');
 
 const fetch = require('node-fetch');
@@ -65,7 +65,7 @@ exports.submitUser = (req, res) => {
 
         picture.mv(`public/uploads/${fileName}`)
             .then(() => {
-                return userModel.addUser( name, surname, email, hash, `/uploads/${fileName}`);
+                return indexModel.addUser( name, surname, email, hash, `/uploads/${fileName}`);
             })
             .then(() => {
                 res.redirect('/login');
@@ -79,7 +79,7 @@ exports.submitUser = (req, res) => {
 
 
 exports.getRegisterPage = (req, res) => {
-    userModel.getAllUsers()
+    indexModel.getAllUsers()
         .then(users => {
             res.render('register', { users });
         })
@@ -94,7 +94,7 @@ exports.getRegisterPage = (req, res) => {
 
 
 exports.getUsersPage = (req, res) => {
-    userModel.getAllUsers()
+    indexModel.getAllUsers()
         .then(users => {
             res.render('users', { users });
         })
@@ -107,10 +107,18 @@ exports.getUsersPage = (req, res) => {
 exports.getUser=(req, res, next) =>{
 
 
-    userModel.getUser(parseInt(req.params.id))
+    indexModel.getUser(parseInt(req.params.id))
         .then(user => res.render('user', {user}))
         .catch(error => {
             res.status(404)
             next(error);
         })
 };
+
+exports.calculateBMI = (req, res) => {
+    let weight = parseFloat(req.query.weight);
+    let height = parseFloat(req.query.height);
+    let bmi = indexModel.calculateBMI(weight, height);
+    let interpretation = indexModel.interpretBMI(bmi);
+    res.render('bmi', { bmi: bmi, interpretation: interpretation });
+}

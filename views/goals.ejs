@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Goals</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <div id="logo">
+            <a href="/">MyGymBro
+            </a>
+        </div>
+
+        <div id="nav-items">
+            <ul>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="#">Goals</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/user">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<form id="goal-form">
+    <h2 class="form-title">Set Your Goals</h2>
+    <label for="calorie-goal">Daily Calorie Goal:</label><br>
+    <input type="number" id="calorie-goal" name="calorie-goal" min="0"><br>
+
+    <label for="exercise-goal">Daily Exercise Minutes Goal:</label><br>
+    <input type="number" id="exercise-goal" name="exercise-goal" min="0"><br>
+
+
+
+    <button type="submit" class="form-button">Set Goals</button>
+</form>
+<p id="message"></p>
+</body>
+</html>
