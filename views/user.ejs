@@ -35,22 +35,27 @@
 
     <div class="user-card">
 
-        <ul>
+        <ul class="flexbox">
             <% var userKeys = Object.keys(user); %>
             <img src="<%= user.picture %>" alt="User Picture" id="user-picture">
-            <ul>
-                <% for (var i = 0; i < userKeys.length; i++) { %>
-                    <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
-                        <li>
-                            <% if (userKeys[i] === "picture"){ %>
 
-                            <% } else { %>
-                                <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
-                            <% } %>
-                        </li>
+
+                    <% for (var i = 0; i < userKeys.length; i++) { %>
+                        <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
+                            <li class="aligner">
+                                <% if (userKeys[i] === "picture"){ %>
+
+                                <% } else { %>
+                                    <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
+                                <% } %>
+                            </li>
+                        <% } %>
                     <% } %>
-                <% } %>
-            </ul>
+
+
+
+
+
         </ul>
 
         <div>
