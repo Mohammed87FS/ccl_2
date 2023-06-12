@@ -37,6 +37,7 @@ exports.getUser = user_id => new Promise((resolve, reject) => {
     })
 });
 
+
 exports.calculateBMI = (weight, height) => {
     let heightInMeters = height / 100;
     return weight / (heightInMeters * heightInMeters);
@@ -53,3 +54,32 @@ exports.interpretBMI = (bmi) => {
         return 'Obesity';
     }
 }
+//...
+
+exports.updateUser = (userId, name, surname, email, password, picture) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE gymBros SET name = ?, surname = ?, email = ?, password = ?, picture = ? WHERE id = ?';
+        db.config.query(sql, [name, surname, email, password, picture, userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.deleteUser = (userId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM gymBros WHERE id = ?';
+        db.config.query(sql, [userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+//...

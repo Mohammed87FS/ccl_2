@@ -27,47 +27,37 @@
 </header>
 
 <!-- User Information -->
-
-
-
 <div>
     <!-- card div -->
-
     <div class="user-card">
-
         <ul class="flexbox">
             <% var userKeys = Object.keys(user); %>
             <img src="<%= user.picture %>" alt="User Picture" id="user-picture">
 
+            <% for (var i = 0; i < userKeys.length; i++) { %>
+                <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
+                    <li class="aligner">
+                        <% if (userKeys[i] === "picture"){ %>
 
-                    <% for (var i = 0; i < userKeys.length; i++) { %>
-                        <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
-                            <li class="aligner">
-                                <% if (userKeys[i] === "picture"){ %>
-
-                                <% } else { %>
-                                    <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
-                                <% } %>
-                            </li>
+                        <% } else { %>
+                            <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
                         <% } %>
-                    <% } %>
-
-
-
-
-
+                    </li>
+                <% } %>
+            <% } %>
         </ul>
 
         <div>
-            <button class="edit" type="submit" value="submit" onclick="forwardToEditUserPage()">Edit</button>
-            <button class="delete" type="submit" value="submit" onclick="deleteUser()">Delete</button>
+            <form action="/user/<%= user.id %>/edit" method="get">
+                <button class="edit" type="submit">Edit</button>
+            </form>
+            <form action="/user/<%= user.id %>/delete" method="post" onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
+                <button class="delete" type="submit">Delete</button>
+            </form>
         </div>
     </div>
-
-
 </div>
 
 <!-- Footer -->
-
 </body>
 </html>

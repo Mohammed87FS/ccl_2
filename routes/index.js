@@ -5,25 +5,15 @@ const authenticationService = require('../services/authentication');
 const userModel = require('../models/indexModel');
 // GET route for rendering the index page
 router.get('/register', indexController.getRegisterPage);
-router.get('/user', authenticationService.authenticateJWT, (req, res, next) => {
-    userModel.getUser(req.user.id)
-        .then(user => res.render('user', {user}))
-        .catch(error => {
-            res.status(404)
-            next(error);
-        })
-});
+
 
 router.get('/users', indexController.getUsersPage);
 
-//router.get('/nutritionPage', indexController.getNutritionPage);
+router.get('/user/:id', indexController.getUser);
 
-// ...
 
-// POST route for getting  router.route('/nutrition')
-//     .get((req, res, next) => {
-//         res.render('nutrition');
-//     }); nutrition details
+
+
 
 router.post('/getNutritionDetails', indexController.getNutritionDetails);
 
@@ -62,6 +52,14 @@ router.route('/login')
 
 // POST route for submitting user
 router.post('/submitUser', indexController.submitUser);
+
+//...
+
+router.get('/user/:id/edit', indexController.getEditUserPage);
+router.post('/user/:id/edit', indexController.editUser);
+router.post('/user/:id/delete', indexController.deleteUser);
+
+//...
 
 
 

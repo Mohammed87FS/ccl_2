@@ -104,6 +104,7 @@ exports.getUsersPage = (req, res) => {
         });
 };
 
+
 exports.getUser=(req, res, next) =>{
 
 
@@ -122,3 +123,62 @@ exports.calculateBMI = (req, res) => {
     let interpretation = indexModel.interpretBMI(bmi);
     res.render('bmi', { bmi: bmi, interpretation: interpretation });
 }
+
+//...
+
+exports.getEditUserPage = (req, res) => {
+    indexModel.getUser(req.params.id)
+        .then(user => {
+            res.render('editUser', { user });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+exports.editUser = (req, res) => {
+    const userId = req.params.id;
+    const { name, surname, email, password } = req.body;
+
+    // If a new image is uploaded, process it; otherwise, use the existing image
+    let pictureUrl = req.body.pictureUrl;
+    if (req.files && req.files.picture) {
+        const imageUUID = uuid.v4();
+        const picture = req.files.picture;
+        const extension = picture.name.split('.').pop();
+        const fileName = `${imageUUID}.${extension}`;
+        picture.mv(`public/uploads/${fileName}`);
+        pictureUrl = `/uploads/${fileName}`;
+    }
+
+    bcrypt.hash(password, 10, function(err, hash) {
+        if (err) {
+            return res.status(500).send('Internal Server Error');
+        }
+
+        indexModel.updateUser(userId, name, surname, email, hash, pictureUrl)
+            .then(() => {
+                res.redirect(`/user/${userId}`);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            });
+    });
+};
+
+exports.deleteUser = (req, res) => {
+    const userId = req.params.id;
+
+    indexModel.deleteUser(userId)
+        .then(() => {
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+//...
