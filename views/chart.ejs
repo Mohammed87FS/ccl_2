@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Intake Table</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <div id="logo">
+            <a href="/">MyGymBro
+            </a>
+        </div>
+
+        <div id="nav-items">
+            <ul>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="/goals">Goals</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+
+                <li><a href="/isloged">Profile</a></li>
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+</header>
+<h1>Calorie Intake Data</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Calories</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% calories.forEach(function(cal) { %>
+        <tr>
+            <td><%= new Date(cal.date).toISOString().slice(0,10) %></td>
+            <td><%= cal.calories %></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>
+</body>
+</html>

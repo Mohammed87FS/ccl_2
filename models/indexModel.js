@@ -110,4 +110,18 @@ exports.getUserCalorieIntake = (userId) => {
     });
 };
 
+exports.getUserCalories = (userId) => {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT calories, date FROM caloriesIntake WHERE userId = ? ORDER BY date ASC";
+        db.config.query(sql, [userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+
 //...

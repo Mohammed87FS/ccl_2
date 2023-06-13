@@ -235,4 +235,20 @@ exports.deleteUser = (req, res) => {
         });
 };
 
+exports.getUserCalories = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const calories = await indexModel.getUserCalories(userId);
+        console.log("Calories data: ", calories); // This line will print the calorie data to your console
+        res.render('chart', {calories: calories});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
+
+
+
+
+
 //...

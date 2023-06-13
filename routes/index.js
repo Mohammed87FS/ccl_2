@@ -4,6 +4,8 @@ const indexController = require('../controllers/indexController');
 const authenticationService = require('../services/authentication');
 const { authenticateJWT } = require('../services/authentication');
 const userModel = require('../models/indexModel');
+
+
 // GET route for rendering the index page
 router.get('/register', indexController.getRegisterPage);
 
@@ -41,6 +43,9 @@ router.post('/submitUser', indexController.submitUser);
 //...
 
 router.get('/isloged',indexController.isloged);
+
+router.get('/getUserCalories', authenticateJWT, indexController.getUserCalories);
+
 // ...
 router.get('/user/:id', authenticateJWT, indexController.getUser);
 //router.get('/user',(req, res)=> res.render('user'));
