@@ -14,6 +14,10 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 require('dotenv').config()
 
+
+// indexController.js
+// indexController.js
+
 exports.getNutritionDetails = async (req, res) => {
     try {
         const { title, ingr } = req.body;
@@ -33,13 +37,26 @@ exports.getNutritionDetails = async (req, res) => {
 
         const data = await response.json();
 
-        res.render('nutrition', { data }); // render data in a 'nutrition' view
+        const userId = req.user.id;
+
+        // Get today's date
+        const today = new Date().toISOString().slice(0,10);
+
+        // Store the calorie intake in the database
+        indexModel.addCalorieIntake(userId, data.calories, today)
+            .then(() => {
+                res.render('nutrition', { data });
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                res.status(500).send('Internal Server Error');
+            });
+
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
 };
-
 
 
 

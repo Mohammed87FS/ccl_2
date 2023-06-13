@@ -82,4 +82,32 @@ exports.deleteUser = (userId) => {
     });
 };
 
+// indexModel.js
+
+exports.addCalorieIntake = (userId, calories, date) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO caloriesIntake (userId, calories, date) VALUES (?, ?, ?)';
+        db.config.query(sql, [userId, calories, date], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.getUserCalorieIntake = (userId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM caloriesIntake WHERE userId = ?';
+        db.config.query(sql, [userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
 //...

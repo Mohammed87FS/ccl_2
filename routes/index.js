@@ -16,7 +16,7 @@ router.get('/users', indexController.getUsersPage);
 
 router.route('/')
     .get((req, res, next) => {
-        res.render('homePage', {});
+        res.render('homePage');
     });
 
 
