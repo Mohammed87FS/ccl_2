@@ -112,6 +112,7 @@ exports.getUser = (req, res, next) => {
 
     indexModel.getUser(req.user.id)
         .then(user => res.render('user', {user}))
+
         .catch(error => {
             res.status(404)
             next(error);

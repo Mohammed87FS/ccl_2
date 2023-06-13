@@ -45,6 +45,7 @@ router.post('/submitUser', indexController.submitUser);
 
 router.get('/user/:id', authenticateJWT, indexController.getUser);
 
+
 router.get('/user/:id/edit', authenticateJWT, indexController.getEditUserPage);
 router.post('/user/:id/edit', authenticateJWT, indexController.editUser);
 router.post('/user/:id/delete', authenticateJWT, indexController.deleteUser);
