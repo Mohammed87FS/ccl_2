@@ -104,17 +104,21 @@ exports.getUsersPage = (req, res) => {
         });
 };
 
+exports.getUser = (req, res, next) => {
+    // Cast to number as the id in token is a number and params are always strings
+    if (parseInt(req.params.id) !== req.user.id) {
+        return res.status(403).send('Unauthorized access');
+    }
 
-exports.getUser=(req, res, next) =>{
-
-
-    indexModel.getUser(parseInt(req.params.id))
+    indexModel.getUser(req.user.id)
         .then(user => res.render('user', {user}))
         .catch(error => {
             res.status(404)
             next(error);
         })
 };
+
+
 
 exports.calculateBMI = (req, res) => {
     let weight = parseFloat(req.query.weight);

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const indexController = require('../controllers/indexController');
 const authenticationService = require('../services/authentication');
+const { authenticateJWT } = require('../services/authentication');
 const userModel = require('../models/indexModel');
 // GET route for rendering the index page
 router.get('/register', indexController.getRegisterPage);
@@ -9,13 +10,7 @@ router.get('/register', indexController.getRegisterPage);
 
 router.get('/users', indexController.getUsersPage);
 
-router.get('/user/:id', indexController.getUser);
 
-
-
-
-
-router.post('/getNutritionDetails', indexController.getNutritionDetails);
 
 // ...
 
@@ -24,16 +19,6 @@ router.route('/')
         res.render('homePage');
     });
 
-router.route('/goals')
-    .get((req, res, next) => {
-        res.render('goals');
-    });
-router.get('/calculate', indexController.calculateBMI);
-
-router.route('/inputFood')
-    .get((req, res, next) => {
-        res.render('inputFood');
-    });
 
 
 router.route('/login')
@@ -55,11 +40,37 @@ router.post('/submitUser', indexController.submitUser);
 
 //...
 
-router.get('/user/:id/edit', indexController.getEditUserPage);
-router.post('/user/:id/edit', indexController.editUser);
-router.post('/user/:id/delete', indexController.deleteUser);
+
+// ...
+
+router.get('/user/:id', authenticateJWT, indexController.getUser);
+
+router.get('/user/:id/edit', authenticateJWT, indexController.getEditUserPage);
+router.post('/user/:id/edit', authenticateJWT, indexController.editUser);
+router.post('/user/:id/delete', authenticateJWT, indexController.deleteUser);
 
 //...
+
+
+//...
+router.route('/goals')
+    .get(authenticateJWT, (req, res, next) => {
+        res.render('goals');
+    });
+
+router.route('/inputFood')
+    .get(authenticateJWT, (req, res, next) => {
+        res.render('inputFood');
+    });
+
+router.get('/calculate', authenticateJWT, indexController.calculateBMI);
+
+router.post('/getNutritionDetails', authenticateJWT, indexController.getNutritionDetails);
+
+router.get('/logout', (req, res) => {
+    res.cookie('accessToken', '', {maxAge: 0});
+    res.redirect('/');
+})
 
 
 
