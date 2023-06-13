@@ -1,13 +1,14 @@
 
 const uuid = require('uuid');
 
-
+const jwt = require('jsonwebtoken');
 // In your controller
 
 const indexModel = require('../models/indexModel');
 const bcrypt = require('bcrypt');
 
 const fetch = require('node-fetch');
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 // ...
 
@@ -110,7 +111,7 @@ exports.getUser = (req, res, next) => {
         return res.status(403).send('Unauthorized access');
     }
 
-    indexModel.getUser(req.user.id)
+    indexModel.getUser(parseInt(req.user.id))
         .then(user => res.render('user', {user}))
 
         .catch(error => {
@@ -119,7 +120,38 @@ exports.getUser = (req, res, next) => {
         })
 };
 
+exports.isloged=(req,res) =>{
+    console.log( ACCESS_TOKEN_SECRET );
+    const token = req.cookies['accessToken'];
+    console.log(token)
 
+    if (!token) {
+        console.log("!token")
+
+        // if there's no token in the cookies, return an error or do something else
+        //return res.status(401).json({ error: 'No token provided.' });
+        res.redirect("/login")
+    }
+
+    try {
+        // verify and decode the token
+        const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+
+        // once decoded, you can access the id that was stored in it
+        const id = decoded.id;
+
+        // do something with the id
+      res.redirect("/user/"+id)
+
+        //... rest of your logic
+
+    } catch(err) {
+        // if there's a problem with decoding, return an error or do something else
+        return res.status(401).json({ error: 'Invalid token.' });
+    }
+
+
+}
 
 exports.calculateBMI = (req, res) => {
     let weight = parseFloat(req.query.weight);

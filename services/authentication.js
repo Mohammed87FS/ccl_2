@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const ACCESS_TOKEN_SECRET = process.env.DB_PASSWORD;
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 async function checkPassword(password, hash){
     let pw = await bcrypt.compare(password, hash)

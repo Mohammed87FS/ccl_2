@@ -16,7 +16,7 @@ router.get('/users', indexController.getUsersPage);
 
 router.route('/')
     .get((req, res, next) => {
-        res.render('homePage');
+        res.render('homePage', {});
     });
 
 
@@ -40,10 +40,10 @@ router.post('/submitUser', indexController.submitUser);
 
 //...
 
-
+router.get('/isloged',indexController.isloged);
 // ...
-
 router.get('/user/:id', authenticateJWT, indexController.getUser);
+//router.get('/user',(req, res)=> res.render('user'));
 
 
 router.get('/user/:id/edit', authenticateJWT, indexController.getEditUserPage);

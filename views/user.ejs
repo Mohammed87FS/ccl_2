@@ -6,6 +6,20 @@
     <title> User: <%= user.name + " " + user.surname %> </title>
     <link rel="stylesheet" href="/user.css">
     <script src="/scripts.js"></script>
+
+    <script>
+        function forwardToEditUserPage() {
+            window.location = <%= user.id %> + '/edit';
+        }
+
+        //TODO: How would we do that with the actual "delete-method" or is that fine?
+        function deleteUser() {
+            let confirmation = confirm("Are you sure you want to delete this user?");
+            if(confirmation) {
+                window.location = <%= user.id %> + '/delete';
+            }
+        }
+    </script>
 </head>
 <body>
 <!-- Navigation -->
@@ -49,15 +63,14 @@
         </ul>
 
         <div>
-            <form action="/user/<%= user.id %>/edit" method="get">
-                <button class="edit" type="submit">Edit</button>
-            </form>
-            <form action="/user/<%= user.id %>/delete" method="post" onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
-                <button class="delete" type="submit">Delete</button>
-            </form>
+
+            <button type="submit" value="submit" onclick="forwardToEditUserPage()" class="edit">Edit</button>
+            <button type="submit" value="submit" onclick="deleteUser()" class="delete">Delete</button>
         </div>
+
     </div>
-</div>
+    </div>
+
 
 <!-- Footer -->
 </body>
