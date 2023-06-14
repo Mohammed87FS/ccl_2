@@ -13,6 +13,8 @@ router.get('/register', indexController.getRegisterPage);
 router.get('/users', indexController.getUsersPage);
 
 
+router.route('/setGoal')
+    .post(authenticateJWT, indexController.setGoals);
 
 // ...
 

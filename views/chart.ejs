@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calorie Intake Table</title>
+    <title>Calorie Intake Chart</title>
     <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #calorieChart {
+            max-width: 800px; /* Set the max width of the chart */
+            height: 400px; /* Set the height of the chart */
+            margin: auto; /* Center the chart if the page is wider than the max width */
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -19,32 +27,58 @@
                 <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
-
                 <li><a href="/isloged">Profile</a></li>
-
-
-
-
             </ul>
         </div>
     </nav>
 </header>
-<h1>Calorie Intake Data</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Calories</th>
-    </tr>
-    </thead>
-    <tbody>
+
+
+<h1>Calorie Intake Chart</h1>
+<canvas id="calorieChart"></canvas>
+
+<script>
+    var dates = [];
+    var calories = [];
+    var goal = [];
+
+    <% var goalValue = dailyCalorieGoal[0].daily_calorie_goal; %>
+
     <% calories.forEach(function(cal) { %>
-        <tr>
-            <td><%= new Date(cal.date).toISOString().slice(0,10) %></td>
-            <td><%= cal.calories %></td>
-        </tr>
+    dates.push('<%= new Date(cal.date).toISOString().slice(0,10) %>');
+    calories.push('<%= cal.calories %>');
+    goal.push('<%= goalValue %>');
     <% }); %>
-    </tbody>
-</table>
+
+    var ctx = document.getElementById('calorieChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Calories',
+                data: calories,
+                backgroundColor: 'rgb(36,50,114)',
+                borderColor: 'rgb(36,50,114)',
+                borderWidth: 3
+            },
+                {
+                    label: 'Goal',
+                    data: goal,
+                    backgroundColor: 'rgb(255,0,0)',
+                    borderColor: 'rgb(255,0,0)',
+                    borderWidth: 3
+                }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>

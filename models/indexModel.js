@@ -97,6 +97,7 @@ exports.addCalorieIntake = (userId, calories, date) => {
     });
 };
 
+
 exports.getUserCalorieIntake = (userId) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM caloriesIntake WHERE userId = ?';
@@ -123,5 +124,30 @@ exports.getUserCalories = (userId) => {
     });
 };
 
+exports.setGoals = (userId, calorieGoal, exerciseGoal) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE gymBros SET daily_calorie_goal = ?, daily_exercise_minutes_goal = ? WHERE id = ?';
+        db.config.query(sql, [calorieGoal, exerciseGoal, userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.getUserDailyCalorieGoal = (userId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT daily_calorie_goal FROM gymBros WHERE id = ?';
+        db.config.query(sql, [userId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
 
 //...

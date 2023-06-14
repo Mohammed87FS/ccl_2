@@ -238,15 +238,35 @@ exports.deleteUser = (req, res) => {
 exports.getUserCalories = async (req, res) => {
     try {
         const userId = req.user.id;
-        const calories = await indexModel.getUserCalories(userId);
-        console.log("Calories data: ", calories); // This line will print the calorie data to your console
-        res.render('chart', {calories: calories});
+        const caloriesIntake = await indexModel.getUserCalorieIntake(userId);
+        const dailyCalorieGoal = await indexModel.getUserDailyCalorieGoal(userId);
+        console.log(dailyCalorieGoal)
+        console.dir(dailyCalorieGoal);
+
+        console.log("Calories data: ", caloriesIntake); // This line will print the calorie data to your console
+        console.log("Daily calorie goal: ", dailyCalorieGoal); // This will print the daily calorie goal to your console
+        res.render('chart', {calories: caloriesIntake, dailyCalorieGoal: dailyCalorieGoal});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
     }
 };
 
+
+exports.setGoals = (req, res) => {
+    const { 'calorie-goal': calorieGoal, 'exercise-goal': exerciseGoal } = req.body;
+    const userId = req.user.id;
+    console.log(req.body)
+
+    indexModel.setGoals(userId, calorieGoal, exerciseGoal)
+        .then(() => {
+            res.redirect(`/user/${userId}`);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
 
 
 
