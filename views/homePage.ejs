@@ -7,7 +7,16 @@
     <title>Fitness Tracker</title>
 </head>
 <body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var closeButton = document.getElementById("closeButton");
 
+        closeButton.addEventListener("click", function() {
+            var notificationDiv = document.getElementById("notificationDiv");
+            notificationDiv.remove();
+        });
+    });
+</script>
 <header>
     <nav>
         <div id="logo">
@@ -34,6 +43,13 @@
 </header>
 
 <main>
+    <% if (justLoggedIn) { %>
+        <div class="notification" id="notificationDiv">
+            You just logged in!
+            <button id="closeButton">Close</button>
+        </div>
+    <% } %>
+
     <section id="hero">
         <h1>Welcome to MyGymBro </h1>
         <p>Track your fitness progress and reach your goals.</p>

@@ -20,7 +20,14 @@ router.route('/setGoal')
 
 router.route('/')
     .get((req, res, next) => {
-        res.render('homePage');
+        let justLoggedIn = req.session.justLoggedIn;
+        res.render('homePage', { justLoggedIn });
+    });
+router.route('/')
+    .get((req, res, next) => {
+        let justLoggedIn = req.session.justLoggedIn;
+        req.session.justLoggedIn = false; // Clear the session variable
+        res.render('homePage', { justLoggedIn });
     });
 
 
@@ -32,7 +39,7 @@ router.route('/login')
     .post((req, res, next) => {
         userModel.getAllUsers()
             .then((users) => {
-                authenticationService.authenticateUser(req.body, users, res)
+                authenticationService.authenticateUser(req, users, res)
             })
             .catch((err) => {
                 res.sendStatus(500)

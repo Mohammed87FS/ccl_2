@@ -6,7 +6,8 @@ async function checkPassword(password, hash){
     let pw = await bcrypt.compare(password, hash)
     return pw;
 }
-async function authenticateUser({email, password}, users, res){
+async function authenticateUser(req, users, res){
+    const { email, password } = req.body;
     const user = users.find(u => {
         return u.email === email;
     });
@@ -14,12 +15,13 @@ async function authenticateUser({email, password}, users, res){
     if (user && password && await checkPassword(password, user.password)) {
         const accessToken = jwt.sign({ id: user.id, name: user.name }, ACCESS_TOKEN_SECRET, { expiresIn: '30m'});
         res.cookie('accessToken', accessToken);
-
+        req.session.justLoggedIn = true;  // Set session variable
         res.redirect('/');
     } else {
         res.send('Username or password incorrect');
     }
 }
+
 
 
 
