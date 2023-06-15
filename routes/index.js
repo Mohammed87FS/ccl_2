@@ -20,15 +20,10 @@ router.route('/setGoal')
 
 router.route('/')
     .get((req, res, next) => {
-        let justLoggedIn = req.session.justLoggedIn;
-        res.render('homePage', { justLoggedIn });
+
+        res.render('homePage');
     });
-router.route('/')
-    .get((req, res, next) => {
-        let justLoggedIn = req.session.justLoggedIn;
-        req.session.justLoggedIn = false; // Clear the session variable
-        res.render('homePage', { justLoggedIn });
-    });
+
 
 
 

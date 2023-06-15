@@ -15,7 +15,7 @@ async function authenticateUser(req, users, res){
     if (user && password && await checkPassword(password, user.password)) {
         const accessToken = jwt.sign({ id: user.id, name: user.name }, ACCESS_TOKEN_SECRET, { expiresIn: '30m'});
         res.cookie('accessToken', accessToken);
-        req.session.justLoggedIn = true;  // Set session variable
+
         res.redirect('/');
     } else {
         res.send('Username or password incorrect');

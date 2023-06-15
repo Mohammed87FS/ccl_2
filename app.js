@@ -4,18 +4,13 @@ const port = 3900;
 const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const path = require('path');
-const session = require('express-session');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const cookieParser = require('cookie-parser');
 
 //...
-app.use(session({
-    secret: 'your secret key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Note: secure cookie should be enabled for production to provide secure cookie
-}))
+
 app.use(cookieParser());
 
 
