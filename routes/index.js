@@ -27,18 +27,15 @@ router.route('/')
         if (token) {
             try {
                 const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-                res.render('homePage', {
-                    user: decoded.name,
-                    userGoalCal: decoded.userGoalCal,
-                    userGoalExercise: decoded.userGoalExercise
-                });
+                res.render('homePage', { user: decoded.name, userGoalCal: decoded.userGoalCal, userGoalExercise: decoded.userGoalExercise });
             } catch (err) {
                 res.sendStatus(500);
             }
         } else {
-            res.render('homePage');
+            res.render('homePage', { user: null, userGoalCal: null, userGoalExercise: null });
         }
     });
+
 
 
 
