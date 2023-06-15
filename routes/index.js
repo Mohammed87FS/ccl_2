@@ -4,6 +4,9 @@ const indexController = require('../controllers/indexController');
 const authenticationService = require('../services/authentication');
 const { authenticateJWT } = require('../services/authentication');
 const userModel = require('../models/indexModel');
+const jwt = require('jsonwebtoken');
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
 
 
 // GET route for rendering the index page
@@ -20,9 +23,24 @@ router.route('/setGoal')
 
 router.route('/')
     .get((req, res, next) => {
-
-        res.render('homePage');
+        const token = req.cookies['accessToken'];
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+                res.render('homePage', {
+                    user: decoded.name,
+                    userGoalCal: decoded.userGoalCal,
+                    userGoalExercise: decoded.userGoalExercise
+                });
+            } catch (err) {
+                res.sendStatus(500);
+            }
+        } else {
+            res.render('homePage');
+        }
     });
+
+
 
 
 

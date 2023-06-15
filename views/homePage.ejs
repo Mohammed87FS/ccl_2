@@ -9,14 +9,15 @@
 <body>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var closeButton = document.getElementById("closeButton");
+        var closeGreetingButton = document.getElementById("closeGreetingButton");
 
-        closeButton.addEventListener("click", function() {
-            var notificationDiv = document.getElementById("notificationDiv");
-            notificationDiv.remove();
+        closeGreetingButton.addEventListener("click", function() {
+            var greetingDiv = document.getElementById("greetingDiv");
+            greetingDiv.remove();
         });
     });
 </script>
+
 <header>
     <nav>
         <div id="logo">
@@ -43,6 +44,20 @@
 </header>
 
 <main>
+
+
+    <div id="greetingDiv">
+        <% if (user) { %>
+            <h1>Hello, <%= user %>!</h1>
+            <p>Your daily calorie goal is: <%= userGoalCal %></p>
+            <p>Your daily exercise minutes goal is: <%= userGoalExercise %></p>
+        <% } else { %>
+            <h1>Welcome to our website!</h1>
+        <% } %>
+        <button id="closeGreetingButton">Close Message</button>
+    </div>
+
+    <!-- Rest of your HTML code... -->
 
 
 

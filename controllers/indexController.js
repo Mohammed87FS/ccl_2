@@ -67,7 +67,7 @@ exports.submitUser = (req, res) => {
         return res.status(400).send('No file uploaded');
     }
 
-    const {  name, surname, email, password } = req.body;
+    const {  name, surname, email, password, daily_calorie_goal, daily_exercise_minutes_goal } = req.body;
 
     // Generate a UUID for the image
     const imageUUID = uuid.v4();
@@ -83,7 +83,7 @@ exports.submitUser = (req, res) => {
 
         picture.mv(`public/uploads/${fileName}`)
             .then(() => {
-                return indexModel.addUser( name, surname, email, hash, `/uploads/${fileName}`);
+                return indexModel.addUser( name, surname, email, hash, `/uploads/${fileName}`, daily_calorie_goal, daily_exercise_minutes_goal);
             })
             .then(() => {
                 res.redirect('/login');

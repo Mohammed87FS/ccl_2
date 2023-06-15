@@ -1,9 +1,9 @@
 const db = require('../services/database.js');
 
-exports.addUser = ( name, surname, email, password, picture) => {
+exports.addUser = ( name, surname, email, password, picture,  daily_calorie_goal, daily_exercise_minutes_goal) => {
     return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO gymBros ( name, surname, email, password, picture) VALUES ( ?, ?, ?, ?, ?)';
-        db.config.query(sql, [ name, surname, email, password, picture], (err, result) => {
+        const sql = 'INSERT INTO gymBros ( name, surname, email, password, picture,  daily_calorie_goal, daily_exercise_minutes_goal) VALUES ( ?, ?, ?, ?, ?,?,?)';
+        db.config.query(sql, [ name, surname, email, password, picture,  daily_calorie_goal, daily_exercise_minutes_goal], (err, result) => {
             if (err) {
                 reject(err);
             } else {
