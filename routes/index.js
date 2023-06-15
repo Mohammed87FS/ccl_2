@@ -32,9 +32,16 @@ router.route('/')
                 res.sendStatus(500);
             }
         } else {
-            res.render('homePage', { user: null, userGoalCal: null, userGoalExercise: null });
+            res.render('homepage2');
         }
     });
+
+/*router.route('/')
+    .get((req, res, next) => {
+
+            res.render('homePage2');
+
+    });*/
 
 
 
