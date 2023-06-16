@@ -46,16 +46,19 @@
 <main>
 
 
+
+        <% if (user && justLoggedIn) { %>
     <div id="greetingDiv">
-        <% if (user) { %>
             <h1>Hello, <%= user %>!</h1>
             <p>Your daily calorie goal is: <%= userGoalCal %></p>
             <p>Your daily exercise minutes goal is: <%= userGoalExercise %></p>
-        <% } else { %>
-            <h1>Welcome to our website!</h1>
-        <% } %>
-        <button id="closeGreetingButton">Close Message</button>
+            <button id="closeGreetingButton">Close Message</button>
     </div>
+        <% } else if (user) { %>
+
+        <% }  %>
+
+
 
     <!-- Rest of your HTML code... -->
 

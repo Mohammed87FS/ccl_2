@@ -24,10 +24,16 @@ router.route('/setGoal')
 router.route('/')
     .get((req, res, next) => {
         const token = req.cookies['accessToken'];
+        const justLoggedIn = req.query.justLoggedIn === 'true'; // Check the query parameter
         if (token) {
             try {
                 const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-                res.render('homePage', { user: decoded.name, userGoalCal: decoded.userGoalCal, userGoalExercise: decoded.userGoalExercise });
+                res.render('homePage', {
+                    user: decoded.name,
+                    userGoalCal: decoded.userGoalCal,
+                    userGoalExercise: decoded.userGoalExercise,
+                    justLoggedIn: justLoggedIn // Pass the flag to your view
+                });
             } catch (err) {
                 if (err instanceof jwt.TokenExpiredError) {
                     res.clearCookie('accessToken');  // clear the expired token
@@ -41,6 +47,7 @@ router.route('/')
             res.render('homePage', { user: null, userGoalCal: null, userGoalExercise: null });
         }
     });
+
 
 
 /*router.route('/')

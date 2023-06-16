@@ -25,11 +25,13 @@ async function authenticateUser(req, users, res){
         );
         res.cookie('accessToken', accessToken);
 
-        res.redirect('/');
+        // Redirect to the homepage with a query parameter
+        res.redirect('/?justLoggedIn=true');
     } else {
         res.send('Username or password incorrect');
     }
 }
+
 
 
 
