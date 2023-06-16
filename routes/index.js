@@ -80,8 +80,8 @@ router.route('/login')
 // POST route for submitting user
 router.post('/submitUser', indexController.submitUser);
 
-router.get('/makeExercise', indexController.getMakeExercisePage);
-router.get('/workoutPlans', indexController.getWorkoutPlansPage);
+router.get('/makeExercise',authenticateJWT, indexController.getMakeExercisePage);
+router.get('/workoutPlans',authenticateJWT, indexController.getWorkoutPlansPage);
 
 router.post('/submitExercise',authenticateJWT, indexController.submitExercise);
 

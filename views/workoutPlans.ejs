@@ -3,23 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> User: <%= user.name + " " + user.surname %> </title>
+    <title>All users</title>
     <link rel="stylesheet" href="/user.css">
-    <script src="/scripts.js"></script>
-
-    <script>
-        function forwardToEditUserPage() {
-            window.location = <%= user.id %> + '/edit';
-        }
-
-        //TODO: How would we do that with the actual "delete-method" or is that fine?
-        function deleteUser() {
-            let confirmation = confirm("Are you sure you want to delete this user?");
-            if(confirmation) {
-                window.location = <%= user.id %> + '/delete';
-            }
-        }
-    </script>
 </head>
 <body>
 <!-- Navigation -->
@@ -31,47 +16,56 @@
         <div id="nav-items">
             <ul>
                 <li><a href="#">Tracker</a></li>
-                <li><a href="/goals">Goals</a></li>
+                <li><a href="goals">Goals</a></li>
                 <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
-                <li><a href="isloged">Profile</a></li>
+                <li><a href="/isloged">Profile</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
-<!-- User Information -->
+<!-- Users Information -->
 <div>
-    <!-- card div -->
-    <div class="user-card">
-        <ul class="flexbox">
-            <% var userKeys = Object.keys(user); %>
-            <img src="<%= user.picture %>" alt="User Picture" id="user-picture">
+    <% if (exercises.length > 0) { %>
+        <% exercises.forEach(exercise => { %>
+            <!-- card div -->
+            <div>
+                <div>
+                    <!-- image div -->
 
-            <% for (var i = 0; i < userKeys.length; i++) { %>
-                <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
-                    <li class="aligner">
-                        <% if (userKeys[i] === "picture"){ %>
+                    <div>
+                        <div>Name:</div>
+                        <p><%= exercise.name %></p>
+                    </div>
+                    <div>
+                        <div>
+                            <div>name:</div>
+                            <p><%= exercise.description %></p>
+                        </div>
 
-                        <% } else { %>
-                            <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
-                        <% } %>
-                    </li>
-                <% } %>
-            <% } %>
-        </ul>
+                        <div>
+                            <span>Body-Part:</span>
+                            <p><%= exercise.bodypart %></p>
+                        </div>
 
-        <div>
 
-            <button type="submit" value="submit" onclick="forwardToEditUserPage()" class="edit">Edit</button>
-            <button type="submit" value="submit" onclick="deleteUser()" class="delete">Delete</button>
-        </div>
+                        <div>
+                            <img src="<%= exercise.picture %>">
+                        </div>
+                    </div>
+                </div>
 
-    </div>
+
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No users found</p>
+    <% } %>
 </div>
 
-
 <!-- Footer -->
+
 </body>
 </html>

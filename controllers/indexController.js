@@ -112,7 +112,9 @@ exports.submitExercise = (req, res) => {
         .then(() => {
             return indexModel.addExercise(name, description, bodypart, `/uploads/${fileName}`, gymBros_id);
         })
-
+        .then(() => {
+            res.redirect("/")
+        })
         .catch(err => {
             console.log(err);
             res.status(500).send('Internal Server Error');
