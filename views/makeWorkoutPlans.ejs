@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exerceises</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<!-- Navigation -->
+<header>
+    <nav>
+        <div id="logo">
+            <a href="/">MyGymBro</a>
+        </div>
+        <div id="nav-items">
+            <ul>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="/goals">Goals</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/isloged">Profile</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- Registration Form -->
+<div class="container">
+    <form action="/submitExercise" method="post" enctype="multipart/form-data" class="form">
+        <h2 class="form-title">Exercise Form</h2>
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" name="name" id="name" required class="form-input">
+
+        <label for="description" class="form-label">Description:</label>
+        <input type="text" name="description" id="description" required class="form-input">
+
+        <label for="bodypart" class="form-label">Body-Part:</label>
+        <input type="text" name="bodypart" id="bodypart" required class="form-input">
+
+
+        <label for="picture" class="form-label">Picture:</label>
+        <input type="file" name="picture" id="picture" accept="image/*" required class="form-input">
+
+        <button type="submit" class="form-button">Submit Exercise</button>
+    </form>
+</div>
+
+<!-- Footer -->
+
+</body>
+</html>

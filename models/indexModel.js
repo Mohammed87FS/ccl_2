@@ -13,6 +13,23 @@ exports.addUser = ( name, surname, email, password, picture,  daily_calorie_goal
     });
 };
 
+
+
+
+exports.addExercise = (name, description, bodypart, picture, gymBros_id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO gymExercises ( name, description, bodypart, picture, gymBros_id) VALUES (?, ?, ?, ?, ?)';
+        db.config.query(sql, [ name, description, bodypart, picture,gymBros_id], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+
 exports.getAllUsers = () => {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM gymBros";
@@ -25,6 +42,19 @@ exports.getAllUsers = () => {
         });
     });
 };
+exports.getAllExercises = () => {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM gymExercises";
+        db.config.query(sql, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
 
 exports.getUser = user_id => new Promise((resolve, reject) => {
     const sql = "SELECT * FROM gymBros WHERE id = ?";

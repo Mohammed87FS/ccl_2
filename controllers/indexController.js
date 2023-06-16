@@ -95,6 +95,32 @@ exports.submitUser = (req, res) => {
     });
 };
 
+exports.submitExercise = (req, res) => {
+    if (!req.files || !req.files.picture) {
+        return res.status(400).send('No file uploaded');
+    }
+    const gymBros_id = req.user.id;
+    const { name, description, bodypart } = req.body;
+
+    // Generate a UUID for the image
+    const imageUUID = uuid.v4();
+    const picture = req.files.picture;
+    const extension = picture.name.split('.').pop();
+    const fileName = `${imageUUID}.${extension}`;
+
+    picture.mv(`public/uploads/${fileName}`)
+        .then(() => {
+            return indexModel.addExercise(name, description, bodypart, `/uploads/${fileName}`, gymBros_id);
+        })
+
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+
+
 
 exports.getRegisterPage = (req, res) => {
     indexModel.getAllUsers()
@@ -108,7 +134,21 @@ exports.getRegisterPage = (req, res) => {
 };
 
 
+exports.getWorkoutPlansPage = (req, res) => {
+    indexModel.getAllExercises()
+        .then(exercises => {
+            res.render('workoutPlans', { exercises });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+exports.getMakeExercisePage = (req, res) => {
 
+            res.render('makeWorkoutPlans');
+
+};
 
 
 exports.getUsersPage = (req, res) => {
@@ -121,6 +161,8 @@ exports.getUsersPage = (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 };
+
+
 
 exports.getUser = (req, res, next) => {
     // Cast to number as the id in token is a number and params are always strings
