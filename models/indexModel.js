@@ -127,6 +127,18 @@ exports.addCalorieIntake = (userId, calories, date) => {
     });
 };
 
+exports.getUserExercises = (gymBros_id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM gymExercises WHERE gymBros_id = ?';
+        db.config.query(sql, [gymBros_id], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
 
 exports.getUserCalorieIntake = (userId) => {
     return new Promise((resolve, reject) => {
