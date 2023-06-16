@@ -29,12 +29,19 @@ router.route('/')
                 const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
                 res.render('homePage', { user: decoded.name, userGoalCal: decoded.userGoalCal, userGoalExercise: decoded.userGoalExercise });
             } catch (err) {
-                res.sendStatus(500);
+                if (err instanceof jwt.TokenExpiredError) {
+                    res.clearCookie('accessToken');  // clear the expired token
+                    res.render('homePage', { user: null, userGoalCal: null, userGoalExercise: null });
+                } else {
+                    console.error(err);  // log other errors
+                    res.sendStatus(500);
+                }
             }
         } else {
-            res.render('homepage2');
+            res.render('homePage', { user: null, userGoalCal: null, userGoalExercise: null });
         }
     });
+
 
 /*router.route('/')
     .get((req, res, next) => {
