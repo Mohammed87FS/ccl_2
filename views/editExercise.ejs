@@ -53,11 +53,9 @@
     <input type="file" id="picture" name="picture">
     <input type="hidden" id="pictureUrl" name="pictureUrl" value="<%= exercise.picture %>">
 
-    <button type="submit">Update</button>
+    <button type="submit" class="edit">Update</button>
 </form>
-<form action="/exercise/<%= exercise.id %>/delete" method="post">
-    <button type="submit">Delete Account</button>
-</form>
+
 
 </body>
 </html>
