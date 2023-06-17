@@ -66,7 +66,7 @@ router.get('/exercise/:id/edit', authenticateJWT, (req, res, next) => {
     indexController.getEditExercisePage(req, res, next);
 });
 router.post('/exercise/:id/editIt', authenticateJWT, indexController.editExercise);
-router.get('/exercise/:id/delete', authenticateJWT, indexController.deleteExercise);
+router.post('/exercise/:id/delete', authenticateJWT, indexController.deleteExercise);
 
 
 

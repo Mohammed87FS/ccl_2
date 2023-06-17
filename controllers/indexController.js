@@ -335,7 +335,7 @@ exports.deleteUser = (req, res) => {
 
     indexModel.deleteUser(userId)
         .then(() => {
-            res.redirect('/');
+            res.redirect('/logout');
         })
         .catch(err => {
             console.log(err);
