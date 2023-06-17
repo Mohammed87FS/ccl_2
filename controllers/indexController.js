@@ -45,8 +45,10 @@ exports.getNutritionDetails = async (req, res) => {
         // Store the calorie intake in the database
         indexModel.addCalorieIntake(userId, data.calories, today)
             .then(() => {
-                res.render('nutrition', { data });
+              res.render('nutrition', { data });
+
             })
+
             .catch(err => {
                 console.error('Error:', err);
                 res.status(500).send('Internal Server Error');

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrition Information</title>
     <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
 <!-- Navigation -->
@@ -37,23 +38,18 @@
 </header>
 
 <!-- Nutrition Information -->
-<h1>Nutrition Information</h1>
+
+
+
+<
 
 <% if (data) { %>
-    <div>
-        <h2>Calories: <%= data.calories %></h2>
-        <h3>Diet Labels:</h3>
-        <ul>
-            <% data.dietLabels.forEach(label => { %>
-                <li><%= label %></li>
-            <% }); %>
-        </ul>
-        <h3>Health Labels:</h3>
-        <ul>
-            <% data.healthLabels.forEach(label => { %>
-                <li><%= label %></li>
-            <% }); %>
-        </ul>
+    <div style="display: flex;  justify-content: center; align-items: center; min-height: 50vh; flex-direction: column;">
+
+        <div id="chartContainer" style="display: flex;background-color: #ffffff; flex-direction: column; align-items: center; max-width: 90%; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <h1>Nutrition Information</h1>
+            <h2>Calories: <%= data.calories %></h2>
+        </div>
     </div>
 <% } else { %>
     <p>No nutrition data available.</p>
