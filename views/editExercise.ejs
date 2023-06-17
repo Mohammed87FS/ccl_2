@@ -29,7 +29,7 @@
     </nav>
 </header>
 
-<form action="/exercise/<%= exercise.id %>/edit" method="post" enctype="multipart/form-data">
+<form action="/exercise/<%= exercise.id %>/editIt" method="post" enctype="multipart/form-data">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="<%= exercise.name %>">
 
@@ -48,8 +48,9 @@
 
     <button type="submit">Update</button>
 </form>
-<form action="/exercie/<%= exercise.id %>/delete" method="post">
+<form action="/exercise/<%= exercise.id %>/delete" method="post">
     <button type="submit">Delete Account</button>
 </form>
+
 </body>
 </html>

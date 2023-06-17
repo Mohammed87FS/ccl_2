@@ -146,22 +146,24 @@ exports.getExercise = (exerciseId) => {
             if (err) {
                 reject(err);
             } else {
+                console.log(result+"result"); // Add this line
                 resolve(result);
             }
         });
     });
 };
 
-exports.updateExercise = (exerciseId, name, description, bodypart) => {
+exports.updateExercise = (exerciseId, name, description, bodypart,picture) => {
     return new Promise((resolve, reject) => {
-        const sql = 'UPDATE gymExercises SET name = ?, description = ?, bodypart = ? WHERE id = ?';
-        db.config.query(sql, [exerciseId,name, description, bodypart ], (err, result) => {
+        const sql = 'UPDATE gymExercises SET name = ?, description = ?, bodypart = ?,picture = ? WHERE id = ?';
+        db.config.query(sql, [name, description, bodypart, picture,exerciseId ], (err, result) => {
             if (err) {
                 reject(err);
             } else {
                 resolve(result);
             }
         });
+
     });
 };
 

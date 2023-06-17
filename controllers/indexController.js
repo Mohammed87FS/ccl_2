@@ -191,19 +191,22 @@ exports.getUsersPage = (req, res) => {
 };
 
 
-
 exports.getExercise = (req, res, next) => {
     // Cast to number as the id in token is a number and params are always strings
-
-
     indexModel.getExercise(parseInt(req.params.id))
-        .then(console.log("there is exercise"))
-
+        .then(exerciseData => {
+            const exercise = exerciseData[0]; // Get the first element of the array
+            console.log("Exercise:", exercise)
+            console.log("Exercise ID:", exercise.id)
+        })
         .catch(error => {
             res.status(404)
             next(error);
         })
 };
+
+
+
 exports.getUser = (req, res, next) => {
     // Cast to number as the id in token is a number and params are always strings
     if (parseInt(req.params.id) !== req.user.id) {
@@ -304,6 +307,29 @@ exports.editUser = (req, res) => {
     });
 };
 
+exports.editExercise = (req, res) => {
+    const exerciseId = req.params.id;
+    const { name, description, bodypart } = req.body;
+
+    let pictureUrl = req.body.pictureUrl;
+    if (req.files && req.files.picture) {
+        const imageUUID = uuid.v4();
+        const picture = req.files.picture;
+        const extension = picture.name.split('.').pop();
+        const fileName = `${imageUUID}.${extension}`;
+        picture.mv(`public/uploads/${fileName}`);
+        pictureUrl = `/uploads/${fileName}`;
+    }
+    indexModel.updateExercise(exerciseId,  name, description, bodypart, pictureUrl)
+        .then(() => {
+            res.redirect(`/`);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
 exports.deleteUser = (req, res) => {
     const userId = req.params.id;
 
@@ -317,15 +343,19 @@ exports.deleteUser = (req, res) => {
         });
 };
 
-exports.getEditExercisePage = (req, res) => {
+// Inside indexController.js
+
+exports.getEditExercisePage = (req, res, next) => {
     indexModel.getExercise(req.params.id)
         .then(exercise => {
-            console.log(exercise)
-
-            console.log(exercise.id)
-            res.render('editExercise', { exercise });
-            console.log({exercise})
-            console.log(exercise.id)
+            if (!exercise || exercise.length === 0) {
+                // handle the error, maybe return a 404 status
+                res.status(404).send('Exercise not found');
+            } else {
+                // render the view with the specific exercise
+                // if 'exercise' is an array, you might want to pass exercise[0] instead
+                res.render('editExercise', { exercise: exercise[0] });
+            }
         })
         .catch(err => {
             console.log(err);
@@ -333,19 +363,8 @@ exports.getEditExercisePage = (req, res) => {
         });
 };
 
-exports.editExercise = (req, res) => {
-    const exerciseId = req.params.id;
-    const { name, description, bodypart } = req.body;
 
-    indexModel.updateExercise(exerciseId, name, description, bodypart)
-        .then(() => {
-            res.redirect(`/exercise/${exerciseId}`);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
-};
+
 
 exports.deleteExercise = (req, res) => {
     const exerciseId = req.params.id;
