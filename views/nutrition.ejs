@@ -46,10 +46,13 @@
 <% if (data) { %>
     <div style="display: flex;  justify-content: center; align-items: center; min-height: 50vh; flex-direction: column;">
 
-        <div id="chartContainer" style="display: flex;background-color: #ffffff; flex-direction: column; align-items: center; max-width: 90%; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div id="chartContainer" style="display: flex;background-color: #ffffff; flex-direction: column; align-items: center; max-width: 90%; padding: 80px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <h1>Nutrition Information</h1>
             <h2>Calories: <%= data.calories %></h2>
+            <button type="button" class="Divbutton" onclick="window.location.href='../getUserCalories'">Display in Chart</button>
         </div>
+
+
     </div>
 <% } else { %>
     <p>No nutrition data available.</p>
