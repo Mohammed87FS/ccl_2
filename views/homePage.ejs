@@ -21,53 +21,46 @@
 <header>
     <nav>
         <div id="logo">
-            <a href="/">MyGymBro
-            </a>
+            <a href="/">MyGymBro</a>
         </div>
 
         <div id="nav-items">
             <ul>
-                <li><a href="#">Tracker</a></li>
-                <li><a href="/goals">Goals</a></li>
+                <li class="dropdown">
+                    <a href="#">Services</a>
+                    <div class="dropdown-content">
+                        <a href="/makeExercise">Make Workout Plans</a>
+                        <a href="/workoutPlans">Workout Plans</a>
+                        <a href="/getUserCalories">Calories Chart</a>
+                        <a href="/inputFood">Calculate Calories</a>
+                        <a href="/calculate">BMI</a>
+                        <a href="/goals">Set Goals</a>
+                    </div>
+                </li>
                 <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
-
                 <li><a href="/isloged">Profile</a></li>
-
-
-
-
             </ul>
         </div>
     </nav>
 </header>
 
 <main>
-
-
-
-        <% if (user && justLoggedIn) { %>
-    <div id="greetingDiv">
+    <% if (user && justLoggedIn) { %>
+        <div id="greetingDiv">
             <h1>Hello, <%= user %>!</h1>
             <p>Your daily calorie goal is: <%= userGoalCal %></p>
             <p>Your daily exercise minutes goal is: <%= userGoalExercise %></p>
             <button id="closeGreetingButton">Close Message</button>
-    </div>
-        <% } else if (user) { %>
+        </div>
+    <% } else if (user) { %>
 
-        <% }  %>
-
-
-
-    <!-- Rest of your HTML code... -->
-
-
+    <% }  %>
 
     <section id="hero">
         <h1>Welcome to MyGymBro </h1>
         <p>Track your fitness progress and reach your goals.</p>
-
     </section>
     <section id="features">
         <div class="feature">

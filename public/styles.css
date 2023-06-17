@@ -150,6 +150,35 @@ footer {
     width: 100%;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #243272;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #243272;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #243272;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #243272;}
+
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {
     nav ul {

@@ -19,7 +19,6 @@ body {
 }
 
 /* Header */
-
 header {
     background-color: #243272;
     padding: 1em;
@@ -29,27 +28,25 @@ header {
 nav {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Add this line */
+    align-items: center;
 }
 
 #logo a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.5em; /* make it a bit bigger */
+    font-size: 1.5em;
     transition: color 0.3s ease;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* add some shadow */
-    border: 2px solid #fff; /* add border */
-    padding: 10px; /* add padding */
-    border-radius: 50px; /* make it rounded */
-    background-color: #243272; /* add some background color */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    border: 2px solid #fff;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #243272;
 }
 
 #logo a:hover {
-    color: #243272; /* change the text color on hover */
-    background-color: #fff; /* change the background color on hover */
+    color: #243272;
+    background-color: #fff;
 }
-
-
 
 #nav-items ul {
     display: flex;
@@ -69,9 +66,37 @@ nav {
 }
 
 #nav-items ul li a:hover {
-    color: #f4f4f4;
+    color: #ffffff;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #243272;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #243272;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #243272;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #243272;}
 
 /* Main */
 main {
@@ -121,6 +146,7 @@ main {
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
+
     text-align: center;
 }
 
@@ -165,7 +191,6 @@ main {
 #closeGreetingButton:hover {
     background-color: #243272;
 }
-
 
 /* Footer */
 footer {

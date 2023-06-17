@@ -232,7 +232,7 @@ exports.isloged=(req,res) =>{
 
         // if there's no token in the cookies, return an error or do something else
         //return res.status(401).json({ error: 'No token provided.' });
-        res.redirect("/login")
+        return res.redirect("/login") // Add return here
     }
 
     try {
@@ -243,7 +243,7 @@ exports.isloged=(req,res) =>{
         const id = decoded.id;
 
         // do something with the id
-      res.redirect("/user/"+id)
+        res.redirect("/user/"+id)
 
         //... rest of your logic
 
@@ -251,8 +251,6 @@ exports.isloged=(req,res) =>{
         // if there's a problem with decoding, return an error or do something else
         return res.status(401).json({ error: 'Invalid token.' });
     }
-
-
 }
 
 exports.calculateBMI = (req, res) => {
