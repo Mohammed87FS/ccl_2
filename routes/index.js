@@ -60,7 +60,11 @@ router.route('/')
 
 
 
+router.get('/exercise/:id', authenticateJWT, indexController.getExercise);
 
+router.get('/exercise/:id/edit', authenticateJWT, indexController.getEditExercisePage);
+router.post('/exercise/:id/edit', authenticateJWT, indexController.editExercise);
+router.get('/exercise/:id/delete', authenticateJWT, indexController.deleteExercise);
 
 
 router.route('/login')

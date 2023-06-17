@@ -116,6 +116,10 @@ main {
     justify-content: space-between;
 
 }
+.rounded-img {
+    border-radius: 50%;
+}
+
 
 .flexbox {
     display: flex;

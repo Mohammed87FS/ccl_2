@@ -192,6 +192,18 @@ exports.getUsersPage = (req, res) => {
 
 
 
+exports.getExercise = (req, res, next) => {
+    // Cast to number as the id in token is a number and params are always strings
+
+
+    indexModel.getExercise(parseInt(req.params.id))
+        .then(console.log("there is exercise"))
+
+        .catch(error => {
+            res.status(404)
+            next(error);
+        })
+};
 exports.getUser = (req, res, next) => {
     // Cast to number as the id in token is a number and params are always strings
     if (parseInt(req.params.id) !== req.user.id) {
@@ -298,6 +310,45 @@ exports.deleteUser = (req, res) => {
     indexModel.deleteUser(userId)
         .then(() => {
             res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+exports.getEditExercisePage = (req, res) => {
+    indexModel.getExercise(req.params.id)
+        .then(exercise => {
+            console.log(exercise)
+            res.render('editExercise', { exercise });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+exports.editExercise = (req, res) => {
+    const exerciseId = req.params.id;
+    const { name, description, bodypart } = req.body;
+
+    indexModel.updateExercise(exerciseId, name, description, bodypart)
+        .then(() => {
+            res.redirect(`/exercise/${exerciseId}`);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
+exports.deleteExercise = (req, res) => {
+    const exerciseId = req.params.id;
+
+    indexModel.deleteExercise(exerciseId)
+        .then(() => {
+            res.redirect('/workoutPlans');
         })
         .catch(err => {
             console.log(err);

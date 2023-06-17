@@ -139,6 +139,45 @@ exports.getUserExercises = (gymBros_id) => {
         });
     });
 };
+exports.getExercise = (exerciseId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM gymExercises WHERE id = ?';
+        db.config.query(sql, [exerciseId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.updateExercise = (exerciseId, name, description, bodypart) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE gymExercises SET name = ?, description = ?, bodypart = ? WHERE id = ?';
+        db.config.query(sql, [name, description, bodypart, exerciseId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+exports.deleteExercise = (exerciseId) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM gymExercises WHERE id = ?';
+        db.config.query(sql, [exerciseId], (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
 
 exports.getUserCalorieIntake = (userId) => {
     return new Promise((resolve, reject) => {
