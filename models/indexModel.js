@@ -155,7 +155,7 @@ exports.getExercise = (exerciseId) => {
 exports.updateExercise = (exerciseId, name, description, bodypart) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE gymExercises SET name = ?, description = ?, bodypart = ? WHERE id = ?';
-        db.config.query(sql, [name, description, bodypart, exerciseId], (err, result) => {
+        db.config.query(sql, [exerciseId,name, description, bodypart ], (err, result) => {
             if (err) {
                 reject(err);
             } else {

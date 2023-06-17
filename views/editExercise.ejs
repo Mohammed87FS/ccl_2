@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise</title>
+    <link rel="stylesheet" href="/user.css">
+    <script src="/scripts.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <div id="logo">
+            <a href="/">MyGymBro
+            </a>
+        </div>
+
+        <div id="nav-items">
+            <ul>
+                <li><a href="#">Tracker</a></li>
+                <li><a href="/goals">Goals</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/isloged">Profile</a></li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<form action="/exercise/<%= exercise.id %>/edit" method="post" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="<%= exercise.name %>">
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" value="<%= exercise.description %>">
+
+    <label for="bodypart">Body-Part:</label>
+    <input type="text" id="bodypart" name="bodypart" value="<%= exercise.bodypart %>">
+
+
+
+
+    <label for="picture">Picture:</label>
+    <input type="file" id="picture" name="picture">
+    <input type="hidden" id="pictureUrl" name="pictureUrl" value="<%= exercise.picture %>">
+
+    <button type="submit">Update</button>
+</form>
+<form action="/exercie/<%= exercise.id %>/delete" method="post">
+    <button type="submit">Delete Account</button>
+</form>
+</body>
+</html>

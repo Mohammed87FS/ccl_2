@@ -321,7 +321,11 @@ exports.getEditExercisePage = (req, res) => {
     indexModel.getExercise(req.params.id)
         .then(exercise => {
             console.log(exercise)
+
+            console.log(exercise.id)
             res.render('editExercise', { exercise });
+            console.log({exercise})
+            console.log(exercise.id)
         })
         .catch(err => {
             console.log(err);
