@@ -46,9 +46,12 @@
 </form>
 
 <% if (bmi) { %>
-    <h2>Results:</h2>
-    <p>BMI: <%= bmi.toFixed(2) %></p>
-    <p>Interpretation: <%= interpretation %></p>
+    <div class="results-section">
+        <h2>Results:</h2>
+        <p>BMI: <%= bmi.toFixed(2) %></p>
+        <p>Interpretation: <%= interpretation %></p>
+    </div>
 <% } %>
+
 </body>
 </html>
