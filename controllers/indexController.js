@@ -194,10 +194,10 @@ exports.getUsersPage = (req, res) => {
 
 
 exports.getExercise = (req, res, next) => {
-    // Cast to number as the id in token is a number and params are always strings
+
     indexModel.getExercise(parseInt(req.params.id))
         .then(exerciseData => {
-            const exercise = exerciseData[0]; // Get the first element of the array
+            const exercise = exerciseData[0];
             console.log("Exercise:", exercise)
             console.log("Exercise ID:", exercise.id)
         })
