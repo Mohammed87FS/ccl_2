@@ -36,25 +36,26 @@
     </nav>
 </header>
 
-<form action="/user/<%= user.id %>/edit" method="post" enctype="multipart/form-data">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" value="<%= user.name %>">
+<main><form action="/user/<%= user.id %>/edit" method="post" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= user.name %>">
 
-    <label for="surname">Surname:</label>
-    <input type="text" id="surname" name="surname" value="<%= user.surname %>">
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" value="<%= user.surname %>">
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<%= user.email %>">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.email %>">
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" value="<%= user.password %>">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" value="<%= user.password %>">
 
-    <label for="picture">Picture:</label>
-    <input type="file" id="picture" name="picture">
-    <input type="hidden" id="pictureUrl" name="pictureUrl" value="<%= user.picture %>">
+        <label for="picture">Picture:</label>
+        <input type="file" id="picture" name="picture">
+        <input type="hidden" id="pictureUrl" name="pictureUrl" value="<%= user.picture %>">
 
-    <button type="submit" class="edit">Update</button>
-</form>
+        <button type="submit" class="edit">Update</button>
+    </form></main>
+
 
 </body>
 </html>
