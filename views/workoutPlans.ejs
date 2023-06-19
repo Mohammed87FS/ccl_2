@@ -12,12 +12,8 @@
             window.location = "/exercise/"+id + '/edit';
         }
 
-            function deleteExercise(id) {
-            let confirmation = confirm("Are you sure you want to delete this exercise?");
-            if(confirmation) {
-            window.location = "/exercise/"+id + '/delete';
-        }
-        }
+
+
 
 
     </script>
@@ -79,9 +75,12 @@
                     </ul>
                     <div>
                         <button type="submit" value="submit" onclick="forwardToEditExercisePage(<%= exercise.id %>)" class="edit">Edit</button>
-                        <button type="submit" value="submit" onclick="deleteExercise(<%= exercise.id %>)" class="delete">Delete</button>
+
 
                     </div>
+                    <form id="deleteExercise" action="/exercise/<%= exercise.id %>/delete" method="POST">
+                        <button type="submit" value="submit"  class="delete">Delete</button>
+                    </form>
                 </div>
             <% }) %>
         <% } else { %>

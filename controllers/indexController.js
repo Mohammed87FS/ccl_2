@@ -332,7 +332,7 @@ exports.editExercise = (req, res) => {
 
 exports.deleteUser = (req, res) => {
     const userId = req.params.id;
-
+ console.log("fdfbdv")
     indexModel.deleteUser(userId)
         .then(() => {
             res.redirect('/logout');

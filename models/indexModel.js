@@ -102,6 +102,7 @@ exports.updateUser = (userId, name, surname, email, password, picture) => {
 exports.deleteUser = (userId) => {
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM gymBros WHERE id = ?';
+        console.log(sql)
         db.config.query(sql, [userId], (err, result) => {
             if (err) {
                 reject(err);
@@ -170,6 +171,7 @@ exports.updateExercise = (exerciseId, name, description, bodypart,picture) => {
 exports.deleteExercise = (exerciseId) => {
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM gymExercises WHERE id = ?';
+        console.log(sql)
         db.config.query(sql, [exerciseId], (err, result) => {
             if (err) {
                 reject(err);
