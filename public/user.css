@@ -8,7 +8,7 @@
 
 /* Custom properties */
 :root {
-    --main-color: #bd0000;
+    --main-color: #000000;
     --accent-color: #000000;
     --light-color: #f5f5f5;
     --dark-color: #ffffff;
@@ -21,7 +21,9 @@ body {
     font-family: var(--font-family);
     font-size: 1rem;
     color: var(--main-color);
-    background-color: #f6f6f6;
+    background-color: #0e0e0e;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Container */
@@ -32,12 +34,13 @@ body {
 
 /* Header */
 header {
-    background-color: var(--main-color);
     padding: 1em;
     color: white;
     position: fixed;
     width: 100%;
     z-index: 10;
+    background-color: #1e1e1e;
+    border-bottom: 8px solid #090909;
 }
 
 nav {
@@ -47,7 +50,7 @@ nav {
 }
 
 #logo a {
-    color: var(--logo-color);
+    color: turquoise;
     text-decoration: none;
     font-size: 1.5em;
     transition: color 0.3s ease;
@@ -55,13 +58,13 @@ nav {
     border: 2px solid var(--logo-color);
     padding: 10px;
     border-radius: 50px;
-    background-color: var(--main-color);
+    background-color:#1e1e1e ;
     margin: 0 10px;
 }
 
 #logo a:hover {
-    color: var(--main-color);
-    background-color: var(--accent-color);
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
 }
 
 #nav-items ul {
@@ -79,10 +82,12 @@ nav {
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s ease;
+    padding: 10px;
 }
 
 #nav-items ul li a:hover {
-    color: var(--accent-color);
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
 }
 
 .dropdown {
@@ -91,10 +96,12 @@ nav {
 }
 
 .dropdown-content {
+    margin-top: 10px;
+    border-bottom: 2px solid turquoise;
+    border-top: #000000;
     display: none;
     position: absolute;
-    background-color: var(--main-color);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color:#1e1e1e ;
     min-width: 210px;
     z-index: 1;
     transition: display 0.5s ease-in-out;
@@ -108,7 +115,6 @@ nav {
 }
 
 .dropdown-content a:hover {
-    background-color: var(--dark-color);
     color: var(--accent-color);
 }
 
@@ -129,14 +135,16 @@ main {
 
 /* User Card */
 .user-card {
-    background-image: linear-gradient(180deg, #bd0000 20%, #fff 20%);
+    background-image: linear-gradient(180deg, #000000 20%, #000000 20%);
     margin: 20px auto;
     max-width: 600px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     display: flex;
+    color: white;
     flex-direction: column;
+    border: 2px solid white;
     align-items: center;
     text-align: center;
 }
@@ -155,23 +163,27 @@ main {
     padding-left: 0;
     text-align: center;
     width: 100%;
+    background-color: black;
 }
 
 .user-card ul li {
     margin-bottom: 10px;
+    background-color: black;
 }
 
 .aligner {
     width: 25%;
     display: flex;
     justify-content: space-between;
+    background-color: black;
 }
+
 .button-container {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
+    background-color: black;
 }
-
 
 .rounded-img {
     border-radius: 50%;
@@ -182,11 +194,10 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
 
 /* Forms */
-
-
 .edit {
     display: inline-block;
     background-color: #bd0000;
@@ -209,7 +220,6 @@ main {
     margin: 10px 0;
     cursor: pointer;
     text-align: center;
-
 }
 
 .edit:hover {

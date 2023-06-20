@@ -7,7 +7,7 @@
 
 /* Custom properties */
 :root {
-    --main-color: #bd0000;
+    --main-color: #000000;
     --accent-color: #000000;
     --light-color: #f5f5f5;
     --dark-color: #ffffff;
@@ -19,25 +19,30 @@ body {
     font-family: var(--font-family);
     font-size: 1rem;
     color: var(--main-color);
-    background-color: #f6f6f6;
+    background-color: #0e0e0e;
 }
 /* General styles */
 
 
 header {
-    background-color: var(--main-color);
+
     padding: 1em;
     color: white;
+    background-color: #1e1e1e;
+    border-bottom: 8px solid #090909;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+
 }
 
 #logo a {
-    color: var(--logo-color);
+
+    color: turquoise;
     text-decoration: none;
     font-size: 1.5em;
     transition: color 0.3s ease;
@@ -45,12 +50,13 @@ nav {
     border: 2px solid var(--logo-color);
     padding: 10px;
     border-radius: 50px;
-    background-color: var(--main-color);
+    background-color:#1e1e1e ;
+    margin: 0 10px;
 }
 
 #logo a:hover {
-    color: var(--main-color);
-    background-color: var(--accent-color);
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
 }
 
 #nav-items ul {
@@ -68,10 +74,55 @@ nav {
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s ease;
+    padding: 10px;
+
 }
 
 #nav-items ul li a:hover {
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+
+}
+
+.dropdown-content {
+    margin-top: 10px;
+    border-bottom: 2px solid turquoise;
+
+    border-top: #000000;
+    display: none;
+    position: absolute;
+    background-color:#1e1e1e ;
+
+
+    min-width: 210px;
+    z-index: 1;
+    transition: display 0.5s ease-in-out;
+}
+
+.dropdown-content a {
+    color: var(--light-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+
     color: var(--accent-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--main-color);
 }
 
 /* Main content */
@@ -89,10 +140,13 @@ main {
 form {
     max-width: 500px;
     margin: 30px auto;
-    background: #ffffff;
+    background-color: #1e1e1e;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    border-bottom: 2px solid turquoise;
+    border-top: 2px solid turquoise;
 }
 
 form input,
@@ -107,8 +161,8 @@ form textarea {
 
 form button {
     display: inline-block;
-    background-color: var(--main-color);
-    color: white;
+    background-color: turquoise;
+    color: #000000;
     padding: 14px 20px;
     margin: 10px 0;
     border: none;
@@ -138,11 +192,11 @@ form button {
 }
 
 form button:hover {
-    background-color: #bd0000;
+    background-color: turquoise;
 }
 
 .cansl:hover {
-    background-color: #bd0000;
+    background-color: turquoise;
     color: var(--light-color);
 }
 
@@ -184,50 +238,8 @@ th {
     color: var(--accent-color);
 }
 
-/* Footer */
-footer {
-    background-color: var(--main-color);
-    color: white;
-    text-align: center;
-    padding: 1em;
-    position: relative; /* Changed from absolute to relative */
-    width: 100%;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--main-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    min-width: 210px;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: var(--light-color);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: var(--dark-color);
-    color: var(--accent-color);
-}
 
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: var(--main-color);
-}
 
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {

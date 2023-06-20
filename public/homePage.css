@@ -15,7 +15,7 @@
 
 /* Custom properties */
 :root {
-    --main-color: #bd0000;
+    --main-color: #000000;
     --accent-color: #000000;
     --light-color: #f5f5f5;
     --dark-color: #ffffff;
@@ -29,7 +29,7 @@ body {
     font-size: 1rem;
     color: var(--main-color);
     /*background-image: url("./uploads/background.svg");*/
-    background-color: #cccccc;
+    background-color: #0e0e0e;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -42,23 +42,28 @@ body {
 
 /* Header */
 header {
-    background-color: var(--main-color);
+
     padding: 1em;
     color: white;
     position: fixed;
     width: 100%;
     z-index: 10;
+    background-color: #1e1e1e;
+    border-bottom: 8px solid #090909;
+
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+
 }
 
 #logo a {
 
-    color: var(--logo-color);
+    color: turquoise;
     text-decoration: none;
     font-size: 1.5em;
     transition: color 0.3s ease;
@@ -66,13 +71,13 @@ nav {
     border: 2px solid var(--logo-color);
     padding: 10px;
     border-radius: 50px;
-    background-color: var(--main-color);
+    background-color:#1e1e1e ;
     margin: 0 10px;
 }
 
 #logo a:hover {
-    color: var(--main-color);
-    background-color: var(--accent-color);
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
 }
 
 #nav-items ul {
@@ -90,22 +95,32 @@ nav {
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s ease;
+    padding: 10px;
+
 }
 
 #nav-items ul li a:hover {
-    color: var(--accent-color);
+    color: white;
+    text-shadow: 0 0 8px turquoise, 0 0 8px turquoise, 0 0 8px turquoise, 0 0 10px turquoise;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
+
+
 }
 
 .dropdown-content {
+    margin-top: 10px;
+    border-bottom: 2px solid turquoise;
+
+    border-top: #000000;
     display: none;
     position: absolute;
-    background-color: var(--main-color);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color:#1e1e1e ;
+
+
     min-width: 210px;
     z-index: 1;
     transition: display 0.5s ease-in-out;
@@ -119,7 +134,7 @@ nav {
 }
 
 .dropdown-content a:hover {
-    background-color: var(--dark-color);
+
     color: var(--accent-color);
 }
 
@@ -137,12 +152,21 @@ main {
     display: grid;
     grid-gap: 30px;
 }
+/* Main */
+
+
+/* Add the following CSS code */
+.blur {
+    filter: blur(5px);
+    pointer-events: none; /* Disable pointer events to prevent interaction with blurred content */
+}
+
 
 /* Hero section */
 #hero {
     text-align: center;
-    padding-bottom: 50px;
-    background: linear-gradient(to bottom, var(--main-color) 0%, var(--accent-color) 100%);
+    padding-top: 10%;
+    ;
     color: var(--light-color);
     border: 5px;
 
@@ -221,8 +245,8 @@ main {
     border: solid black 5px;
 
     padding: 20px;
-    background-color: rgba(103, 0, 0);
-    box-shadow: 0px 0px 10px 10px #CB2121;
+    background-color: #1e1e1e;
+    box-shadow: 0px 0px 10px 10px turquoise;
     border-radius: 10px;
     z-index: 11;
 }
@@ -270,12 +294,12 @@ main {
     margin-top: 20px;
     padding: 10px 20px;
     border: none;
-    border-radius: 50px;
-    background: linear-gradient(var(--main-color), var(--accent-color));
-    color: white;
+    border-radius: 4px;
+   background-color: turquoise;
+    color: #000000;
     cursor: pointer;
     z-index: 1;
-    overflow: hidden;
+
 }
 
 
