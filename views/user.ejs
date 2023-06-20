@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> User: <%= user.name + " " + user.surname %> </title>
+    <title>User: <%= user.name + " " + user.surname %></title>
     <link rel="stylesheet" href="/user.css">
     <script src="/scripts.js"></script>
-
     <script>
         function forwardToEditUserPage() {
             window.location = <%= user.id %> + '/edit';
         }
-
-
-
     </script>
 </head>
+
 <body>
 <!-- Navigation -->
 <header>
@@ -23,10 +21,8 @@
         <div id="logo">
             <a href="/">MyGymBro</a>
         </div>
-
         <div id="nav-items">
             <ul>
-
                 <li><a href="/register">Register</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
@@ -49,24 +45,33 @@
 
 <!-- User Information -->
 <main>
-<div>
-    <!-- card div -->
+    <div class="container">
+
     <div class="user-card">
+        <div class="user-picture">
+            <img class="rounded-img" id="user-picture" src="<%= user.picture %>">
+        </div>
         <ul class="flexbox">
-            <% var userKeys = Object.keys(user); %>
-            <img src="<%= user.picture %>" alt="User Picture" id="user-picture">
-
-            <% for (var i = 0; i < userKeys.length; i++) { %>
-                <% if (userKeys[i] !== "password" && userKeys[i] !== "id" ) { %>
-                    <li class="aligner">
-                        <% if (userKeys[i] === "picture"){ %>
-
-                        <% } else { %>
-                            <%= userKeys[i] %>: <b> <%= user[userKeys[i]] %> </b>
-                        <% } %>
-                    </li>
-                <% } %>
-            <% } %>
+            <li class="aligner">
+                <div>Name:</div>
+                <b><%= user.name %></b>
+            </li>
+            <li class="aligner">
+                <div>Surname:</div>
+                <b><%= user.surname %></b>
+            </li>
+            <li class="aligner">
+                <div>Email:</div>
+                <b><%= user.email %></b>
+            </li>
+            <li class="aligner">
+                <div>Exercise goal:</div>
+                <b><%= user.daily_exercise_minutes_goal %></b>
+            </li>
+            <li class="aligner">
+                <div>Calorie goal:</div>
+                <b><%= user.daily_calorie_goal %></b>
+            </li>
         </ul>
 
 
@@ -76,14 +81,11 @@
                 <button type="submit" value="submit" class="delete">Delete</button>
             </form>
         </div>
-
-
-
     </div>
     </div>
-
+</main>
 
 <!-- Footer -->
-</main>
 </body>
+
 </html>

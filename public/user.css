@@ -54,11 +54,11 @@ nav {
     text-decoration: none;
     font-size: 1.5em;
     transition: color 0.3s ease;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border: 2px solid var(--logo-color);
     padding: 10px;
     border-radius: 50px;
-    background-color:#1e1e1e ;
+    background-color: #1e1e1e;
     margin: 0 10px;
 }
 
@@ -101,7 +101,7 @@ nav {
     border-top: #000000;
     display: none;
     position: absolute;
-    background-color:#1e1e1e ;
+    background-color: #1e1e1e;
     min-width: 210px;
     z-index: 1;
     transition: display 0.5s ease-in-out;
@@ -135,7 +135,7 @@ main {
 
 /* User Card */
 .user-card {
-    background-image: linear-gradient(180deg, #000000 20%, #000000 20%);
+    background-image: linear-gradient(180deg, turquoise 20%, #1e1e1e 20%);
     margin: 20px auto;
     max-width: 600px;
     padding: 20px;
@@ -144,7 +144,7 @@ main {
     display: flex;
     color: white;
     flex-direction: column;
-    border: 2px solid white;
+
     align-items: center;
     text-align: center;
 }
@@ -153,7 +153,7 @@ main {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: #ffffff solid 5px;
+    border: #ffffff solid 3px;
     margin-bottom: 20px;
     object-fit: cover;
 }
@@ -163,26 +163,26 @@ main {
     padding-left: 0;
     text-align: center;
     width: 100%;
-    background-color: black;
+    background-color: #1e1e1e;
 }
 
 .user-card ul li {
     margin-bottom: 10px;
-    background-color: black;
+    background-color: #1e1e1e;
 }
 
 .aligner {
     width: 25%;
     display: flex;
     justify-content: space-between;
-    background-color: black;
+    background-color: #1e1e1e;
 }
 
 .button-container {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 10px;
-    background-color: black;
+    background-color: #1e1e1e;
 }
 
 .rounded-img {
@@ -200,8 +200,8 @@ main {
 /* Forms */
 .edit {
     display: inline-block;
-    background-color: #bd0000;
-    color: white;
+    background-color: turquoise;
+    color: #000000;
     padding: 14px 20px;
     margin: 10px 0;
     border: none;
@@ -214,7 +214,7 @@ main {
     display: inline-block;
     background-color: #ffffff;
     color: #000000;
-    border: #bd0000 solid 2px;
+    border: turquoise solid 2px;
     padding: 14px 20px;
     border-radius: 4px;
     margin: 10px 0;
@@ -223,12 +223,12 @@ main {
 }
 
 .edit:hover {
-    background-color: #bd0000;
+    background-color: turquoise;
 }
 
 .delete:hover {
-    background-color: #bd0000;
-    color: #ffffff;
+    background-color: turquoise;
+    color: #000000;
 }
 
 /* Tables */

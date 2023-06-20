@@ -288,32 +288,31 @@ exports.editUser = (req, res, next) => {
 };
 
 exports.editExercise = (req, res, next) => {
-    const exerciseId = req.params.id;
+    if (!req.files || !req.files.picture) {
+        return res.status(400).send('No file uploaded');
+    }
+    const exerciseId= req.params.id;
     const { name, description, bodypart } = req.body;
 
-    let pictureUrl = req.body.pictureUrl;
-    if (req.files && req.files.picture) {
-        const imageUUID = uuid.v4();
-        const picture = req.files.picture;
-        const extension = picture.name.split('.').pop();
-        const fileName = `${imageUUID}.${extension}`;
+    // Generate a UUID for the image
+    const imageUUID = uuid.v4();
+    const picture = req.files.picture;
+    const extension = picture.name.split('.').pop();
+    const fileName = `${imageUUID}.${extension}`;
 
-        picture.mv(`public/uploads/${fileName}`)
-            .then(() => {
-                pictureUrl = `/uploads/${fileName}`;
-            })
-            .catch(error => {
-                next(error);
-            });
-    }
-
-    indexModel.updateExercise(exerciseId, name, description, bodypart, pictureUrl)
+    picture.mv(`public/uploads/${fileName}`)
         .then(() => {
-            res.redirect(`/workoutPlans`);
+            return indexModel.updateExercise(exerciseId, name, description, bodypart, `/uploads/${fileName}`);
+
         })
-        .catch(error => {
-            next(error);
+        .then(() => {
+            res.redirect("/workoutPlans")
+        })
+        .catch(err => {
+            console.log(err);
+            next(err); // forward error to the next middleware
         });
+
 };
 
 
