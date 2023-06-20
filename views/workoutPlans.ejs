@@ -73,14 +73,14 @@
                             <b><%= exercise.bodypart %></b>
                         </li>
                     </ul>
-                    <div>
+
+                    <div class="button-container">
                         <button type="submit" value="submit" onclick="forwardToEditExercisePage(<%= exercise.id %>)" class="edit">Edit</button>
-
-
+                        <form id="deleteExercise" action="/exercise/<%= exercise.id %>/delete" method="POST">
+                            <button type="submit" value="submit" class="delete">Delete</button>
+                        </form>
                     </div>
-                    <form id="deleteExercise" action="/exercise/<%= exercise.id %>/delete" method="POST">
-                        <button type="submit" value="submit"  class="delete">Delete</button>
-                    </form>
+
                 </div>
             <% }) %>
         <% } else { %>

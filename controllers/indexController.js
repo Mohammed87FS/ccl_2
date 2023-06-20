@@ -115,7 +115,7 @@ exports.submitExercise = (req, res, next) => {
             return indexModel.addExercise(name, description, bodypart, `/uploads/${fileName}`, gymBros_id);
         })
         .then(() => {
-            res.redirect("/")
+            res.redirect("/workoutPlans")
         })
         .catch(err => {
             console.log(err);
@@ -309,7 +309,7 @@ exports.editExercise = (req, res, next) => {
 
     indexModel.updateExercise(exerciseId, name, description, bodypart, pictureUrl)
         .then(() => {
-            res.redirect(`/`);
+            res.redirect(`/workoutPlans`);
         })
         .catch(error => {
             next(error);

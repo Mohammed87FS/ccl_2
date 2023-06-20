@@ -68,15 +68,15 @@
             <% } %>
         </ul>
 
-        <div>
 
+        <div class="button-container">
             <button type="submit" value="submit" onclick="forwardToEditUserPage()" class="edit">Edit</button>
-
-
+            <form id="deleteUser" action="<%= user.id %>/delete" method="POST">
+                <button type="submit" value="submit" class="delete">Delete</button>
+            </form>
         </div>
-        <form id="deleteUser" action="<%= user.id %>/delete" method="POST">
-            <button type="submit" value="submit"  class="delete">Delete</button>
-        </form>
+
+
 
     </div>
     </div>

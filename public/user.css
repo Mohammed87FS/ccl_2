@@ -166,6 +166,12 @@ main {
     display: flex;
     justify-content: space-between;
 }
+.button-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
 
 .rounded-img {
     border-radius: 50%;
@@ -194,11 +200,16 @@ main {
 }
 
 .delete {
+    display: inline-block;
     background-color: #ffffff;
     color: #000000;
     border: #bd0000 solid 2px;
-    padding: 12px 14px;
+    padding: 14px 20px;
     border-radius: 4px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: center;
+
 }
 
 .edit:hover {
