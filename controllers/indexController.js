@@ -18,7 +18,7 @@ require('dotenv').config()
 // indexController.js
 // indexController.js
 
-exports.getNutritionDetails = async (req, res) => {
+exports.getNutritionDetails = async (req, res, next) => {
     try {
         const { title, ingr } = req.body;
 
@@ -45,26 +45,25 @@ exports.getNutritionDetails = async (req, res) => {
         // Store the calorie intake in the database
         indexModel.addCalorieIntake(userId, data.calories, today)
             .then(() => {
-              res.render('nutrition', { data });
-
+                res.render('nutrition', { data });
             })
-
             .catch(err => {
                 console.error('Error:', err);
-                res.status(500).send('Internal Server Error');
+                next(err); // forward error to the next middleware
             });
 
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+        next(error); // forward error to the next middleware
     }
 };
 
 
 
+
 // ...
 
-exports.submitUser = (req, res) => {
+exports.submitUser = (req, res, next) => {
     if (!req.files || !req.files.picture) {
         return res.status(400).send('No file uploaded');
     }
@@ -80,7 +79,7 @@ exports.submitUser = (req, res) => {
     // Hash password
     bcrypt.hash(password, 10, function(err, hash) {
         if (err) {
-            return res.status(500).send('Internal Server Error');
+            return next(err); // forward error to the next middleware
         }
 
         picture.mv(`public/uploads/${fileName}`)
@@ -92,12 +91,13 @@ exports.submitUser = (req, res) => {
             })
             .catch(err => {
                 console.log(err);
-                res.status(500).send('Internal Server Error');
+                next(err); // forward error to the next middleware
             });
     });
 };
 
-exports.submitExercise = (req, res) => {
+
+exports.submitExercise = (req, res, next) => {
     if (!req.files || !req.files.picture) {
         return res.status(400).send('No file uploaded');
     }
@@ -119,21 +119,21 @@ exports.submitExercise = (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).send('Internal Server Error');
+            next(err); // forward error to the next middleware
         });
 };
 
 
 
 
-exports.getRegisterPage = (req, res) => {
+exports.getRegisterPage = (req, res, next) => {
     indexModel.getAllUsers()
         .then(users => {
             res.render('register', { users });
         })
         .catch(err => {
             console.log(err);
-            res.status(500).send('Internal Server Error');
+            next(err); // forward error to the next middleware
         });
 };
 
@@ -141,7 +141,8 @@ exports.getRegisterPage = (req, res) => {
 
 
 
-exports.getWorkoutPlansPage = async (req, res) => {
+
+exports.getWorkoutPlansPage = async (req, res, next) => {
     try {
         const gymBros_id = req.user.id;
         const exercises = await indexModel.getUserExercises(gymBros_id);
@@ -149,10 +150,11 @@ exports.getWorkoutPlansPage = async (req, res) => {
         res.render('workoutPlans', {exercises: exercises});
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+        next(error); // forward error to the next middleware
     }
 };
-exports.getUserCalories = async (req, res) => {
+
+exports.getUserCalories = async (req, res, next) => {
     try {
         const userId = req.user.id;
         const caloriesIntake = await indexModel.getUserCalorieIntake(userId);
@@ -165,7 +167,7 @@ exports.getUserCalories = async (req, res) => {
         res.render('chart', {calories: caloriesIntake, dailyCalorieGoal: dailyCalorieGoal});
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+        next(error); // forward error to the next middleware
     }
 };
 
@@ -173,141 +175,119 @@ exports.getUserCalories = async (req, res) => {
 
 
 
-
-exports.getMakeExercisePage = (req, res) => {
-
-            res.render('makeWorkoutPlans');
-
+exports.getMakeExercisePage = (req, res, next) => {
+    try {
+        res.render('makeWorkoutPlans');
+    } catch (error) {
+        next(error);
+    }
 };
 
-
-exports.getUsersPage = (req, res) => {
-    indexModel.getAllUsers()
-        .then(users => {
-            res.render('users', { users });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
+exports.getUsersPage = async (req, res, next) => {
+    try {
+        const users = await indexModel.getAllUsers();
+        res.render('users', { users });
+    } catch (error) {
+        next(error);
+    }
 };
 
-
-exports.getExercise = (req, res, next) => {
-
-    indexModel.getExercise(parseInt(req.params.id))
-        .then(exerciseData => {
-            const exercise = exerciseData[0];
-            console.log("Exercise:", exercise)
-            console.log("Exercise ID:", exercise.id)
-        })
-        .catch(error => {
-            res.status(404)
-            next(error);
-        })
+exports.getExercise = async (req, res, next) => {
+    try {
+        const exerciseData = await indexModel.getExercise(parseInt(req.params.id));
+        const exercise = exerciseData[0];
+        console.log("Exercise:", exercise);
+        console.log("Exercise ID:", exercise.id);
+    } catch (error) {
+        next(error);
+    }
 };
 
-
-
-exports.getUser = (req, res, next) => {
-    // Cast to number as the id in token is a number and params are always strings
+exports.getUser = async (req, res, next) => {
     if (parseInt(req.params.id) !== req.user.id) {
         return res.status(403).send('Unauthorized access');
     }
-
-    indexModel.getUser(parseInt(req.user.id))
-        .then(user => res.render('user', {user}))
-
-        .catch(error => {
-            res.status(404)
-            next(error);
-        })
+    try {
+        const user = await indexModel.getUser(parseInt(req.user.id));
+        res.render('user', {user});
+    } catch (error) {
+        next(error);
+    }
 };
 
-exports.isloged=(req,res) =>{
+exports.isloged = (req, res, next) => {
     console.log( ACCESS_TOKEN_SECRET );
     const token = req.cookies['accessToken'];
-    console.log(token)
-
+    console.log(token);
     if (!token) {
-        console.log("!token")
-
-        // if there's no token in the cookies, return an error or do something else
-        //return res.status(401).json({ error: 'No token provided.' });
+        console.log("!token");
         return res.redirect("/login") // Add return here
     }
-
     try {
-        // verify and decode the token
         const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-
-        // once decoded, you can access the id that was stored in it
         const id = decoded.id;
-
-        // do something with the id
-        res.redirect("/user/"+id)
-
-        //... rest of your logic
-
+        res.redirect("/user/"+id);
     } catch(err) {
-        // if there's a problem with decoding, return an error or do something else
-        return res.status(401).json({ error: 'Invalid token.' });
+        return next(new Error('Invalid token.'));
     }
-}
-
-exports.calculateBMI = (req, res) => {
-    let weight = parseFloat(req.query.weight);
-    let height = parseFloat(req.query.height);
-    let bmi = indexModel.calculateBMI(weight, height);
-    let interpretation = indexModel.interpretBMI(bmi);
-    res.render('bmi', { bmi: bmi, interpretation: interpretation });
-}
-
-//...
-
-exports.getEditUserPage = (req, res) => {
-    indexModel.getUser(req.params.id)
-        .then(user => {
-            res.render('editUser', { user });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
 };
 
-exports.editUser = (req, res) => {
+exports.calculateBMI = (req, res, next) => {
+    try {
+        let weight = parseFloat(req.query.weight);
+        let height = parseFloat(req.query.height);
+        let bmi = indexModel.calculateBMI(weight, height);
+        let interpretation = indexModel.interpretBMI(bmi);
+        res.render('bmi', { bmi: bmi, interpretation: interpretation });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.getEditUserPage = async (req, res, next) => {
+    try {
+        const user = await indexModel.getUser(req.params.id);
+        res.render('editUser', { user });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.editUser = (req, res, next) => {
     const userId = req.params.id;
     const { name, surname, email, password } = req.body;
 
-    // If a new image is uploaded, process it; otherwise, use the existing image
     let pictureUrl = req.body.pictureUrl;
     if (req.files && req.files.picture) {
         const imageUUID = uuid.v4();
         const picture = req.files.picture;
         const extension = picture.name.split('.').pop();
         const fileName = `${imageUUID}.${extension}`;
-        picture.mv(`public/uploads/${fileName}`);
-        pictureUrl = `/uploads/${fileName}`;
+
+        picture.mv(`public/uploads/${fileName}`)
+            .then(() => {
+                pictureUrl = `/uploads/${fileName}`;
+            })
+            .catch(error => {
+                next(error);
+            });
     }
 
-    bcrypt.hash(password, 10, function(err, hash) {
+    bcrypt.hash(password, 10, (err, hash) => {
         if (err) {
-            return res.status(500).send('Internal Server Error');
+            return next(err);
         }
-
         indexModel.updateUser(userId, name, surname, email, hash, pictureUrl)
             .then(() => {
                 res.redirect(`/user/${userId}`);
             })
-            .catch(err => {
-                console.log(err);
-                res.status(500).send('Internal Server Error');
+            .catch(error => {
+                next(error);
             });
     });
 };
 
-exports.editExercise = (req, res) => {
+exports.editExercise = (req, res, next) => {
     const exerciseId = req.params.id;
     const { name, description, bodypart } = req.body;
 
@@ -317,102 +297,68 @@ exports.editExercise = (req, res) => {
         const picture = req.files.picture;
         const extension = picture.name.split('.').pop();
         const fileName = `${imageUUID}.${extension}`;
-        picture.mv(`public/uploads/${fileName}`);
-        pictureUrl = `/uploads/${fileName}`;
+
+        picture.mv(`public/uploads/${fileName}`)
+            .then(() => {
+                pictureUrl = `/uploads/${fileName}`;
+            })
+            .catch(error => {
+                next(error);
+            });
     }
-    indexModel.updateExercise(exerciseId,  name, description, bodypart, pictureUrl)
+
+    indexModel.updateExercise(exerciseId, name, description, bodypart, pictureUrl)
         .then(() => {
             res.redirect(`/`);
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
-};
-
-exports.deleteUser = (req, res) => {
-    const userId = req.params.id;
- console.log("fdfbdv")
-    indexModel.deleteUser(userId)
-        .then(() => {
-            res.redirect('/logout');
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
-};
-
-// Inside indexController.js
-
-exports.getEditExercisePage = (req, res, next) => {
-    indexModel.getExercise(req.params.id)
-        .then(exercise => {
-            if (!exercise || exercise.length === 0) {
-                // handle the error, maybe return a 404 status
-                res.status(404).send('Exercise not found');
-            } else {
-                // render the view with the specific exercise
-                // if 'exercise' is an array, you might want to pass exercise[0] instead
-                res.render('editExercise', { exercise: exercise[0] });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
+        .catch(error => {
+            next(error);
         });
 };
 
 
-
-
-exports.deleteExercise = (req, res) => {
-    const exerciseId = req.params.id;
-
-    indexModel.deleteExercise(exerciseId)
-        .then(() => {
-            res.redirect('/workoutPlans');
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
-};
-
-exports.getUserCalories = async (req, res) => {
+exports.deleteUser = async (req, res, next) => {
     try {
-        const userId = req.user.id;
-        const caloriesIntake = await indexModel.getUserCalorieIntake(userId);
-        const dailyCalorieGoal = await indexModel.getUserDailyCalorieGoal(userId);
-        console.log(dailyCalorieGoal)
-        console.dir(dailyCalorieGoal);
-
-        console.log("Calories data: ", caloriesIntake); // This line will print the calorie data to your console
-        console.log("Daily calorie goal: ", dailyCalorieGoal); // This will print the daily calorie goal to your console
-        res.render('chart', {calories: caloriesIntake, dailyCalorieGoal: dailyCalorieGoal});
+        const userId = req.params.id;
+        console.log("fdfbdv");
+        await indexModel.deleteUser(userId);
+        res.redirect('/logout');
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+        next(error);
     }
 };
 
-
-exports.setGoals = (req, res) => {
-    const { 'calorie-goal': calorieGoal, 'exercise-goal': exerciseGoal } = req.body;
-    const userId = req.user.id;
-    console.log(req.body)
-
-    indexModel.setGoals(userId, calorieGoal, exerciseGoal)
-        .then(() => {
-            res.redirect(`/user/${userId}`);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
-        });
+exports.getEditExercisePage = async (req, res, next) => {
+    try {
+        const exercise = await indexModel.getExercise(req.params.id);
+        if (!exercise || exercise.length === 0) {
+            res.status(404).send('Exercise not found');
+        } else {
+            res.render('editExercise', { exercise: exercise[0] });
+        }
+    } catch (error) {
+        next(error);
+    }
 };
 
+exports.deleteExercise = async (req, res, next) => {
+    try {
+        const exerciseId = req.params.id;
+        await indexModel.deleteExercise(exerciseId);
+        res.redirect('/workoutPlans');
+    } catch (error) {
+        next(error);
+    }
+};
 
-
-
-//...
+exports.setGoals = async (req, res, next) => {
+    const { 'calorie-goal': calorieGoal, 'exercise-goal': exerciseGoal } = req.body;
+    const userId = req.user.id;
+    console.log(req.body);
+    try {
+        await indexModel.setGoals(userId, calorieGoal, exerciseGoal);
+        res.redirect(`/user/${userId}`);
+    } catch (error) {
+        next(error);
+    }
+};

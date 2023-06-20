@@ -26,6 +26,11 @@ app.use('/', indexRouter);
 
 app.use('/users', usersRouter);
 
+app.use((err, req, res, next) => {
+    console.error(err.stack); // log error stack trace
+    res.status(err.status || 500); // set HTTP status code
+    res.render('error', { error: err.message || 'Internal Server Error' }); // render the error page
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

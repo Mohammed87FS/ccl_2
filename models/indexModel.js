@@ -8,6 +8,7 @@ exports.addUser = ( name, surname, email, password, picture,  daily_calorie_goal
                 reject(err);
             } else {
                 resolve(result);
+                // ;)
             }
         });
     });
