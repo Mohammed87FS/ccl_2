@@ -338,6 +338,46 @@ main {
 }
 
 
+.shining-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.shining-effect::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: shining-animation 2s infinite;
+}
+
+@keyframes shining-animation {
+    0% {
+        color: turquoise;
+        text-shadow: 0 0 10px turquoise;
+    }
+    25% {
+        color: turquoise;
+        text-shadow: 0 0 10px turquoise;
+    }
+    50% {
+        color: white;
+        text-shadow: none;
+    }
+    75% {
+        color: turquoise;
+        text-shadow: 0 0 10px turquoise;
+    }
+
+    100% {
+        color: turquoise;
+        text-shadow: 0 0 10px turquoise;
+    }
+}
+
+
 /* Media Queries */
 @media (max-width: 768px) {
     #features {
