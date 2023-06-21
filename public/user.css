@@ -57,7 +57,7 @@ nav {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     border: 2px solid var(--logo-color);
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 10px;
     background-color: #1e1e1e;
     margin: 0 10px;
 }

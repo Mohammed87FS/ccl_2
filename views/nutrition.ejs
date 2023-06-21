@@ -6,6 +6,59 @@
     <title>Nutrition Information</title>
     <link rel="stylesheet" href="/styles.css">
 
+    <style>
+        .divv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+height: 70vh;
+            background-color: #0e0e0e;
+        }
+
+        .card {
+            padding: 20px;
+            max-width: 400px;
+
+            border-radius: 8px;
+            text-align: center;
+            background-color: #1e1e1e;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: white;
+            border-bottom: 2px solid turquoise;
+            border-top: 2px solid turquoise;
+        }
+
+        h1 {
+            color: #bdbdbd;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        p {
+            color: #9d9d9d;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: turquoise;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+
+
 </head>
 <body>
 <!-- Navigation -->
@@ -42,19 +95,18 @@
 
 
 
-<
 
 <% if (data) { %>
-    <div style="display: flex;  justify-content: center; align-items: center; min-height: 50vh; flex-direction: column;">
 
-        <div id="chartContainer" style="display: flex;background-color: #ffffff; flex-direction: column; align-items: center; max-width: 90%; padding: 80px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+<div class="divv">
+        <div class="card">
             <h1>Nutrition Information</h1>
             <h2>Calories: <%= data.calories %></h2>
-            <button type="button" class="Divbutton" onclick="window.location.href='../getUserCalories'">Display in Chart</button>
+            <button type="button" class="edit" onclick="window.location.href='../getUserCalories'">Display in Chart</button>
         </div>
 
+</div>
 
-    </div>
 <% } else { %>
     <p>No nutrition data available.</p>
 <% } %>

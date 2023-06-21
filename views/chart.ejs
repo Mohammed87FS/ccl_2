@@ -43,8 +43,8 @@
 </header>
 
 <div style="display: flex;  justify-content: center; align-items: center; min-height: 80vh; flex-direction: column;">
-    <div id="chartContainer" style="display: flex;background-color: #ffffff; flex-direction: column; align-items: center; max-width: 90%; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <h1>Calorie Intake Chart</h1>
+    <div id="chartContainer"  style="display: flex; border-bottom: 2px solid turquoise;border-top: 2px solid turquoise;background-color: #1e1e1e; flex-direction: column; align-items: center; max-width: 90%; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="color: white">Calorie Intake Chart</h1>
         <canvas id="calorieChart"></canvas>
     </div>
 </div>
@@ -75,19 +75,20 @@
             datasets: [{
                 label: 'Calories',
                 data: calories,
-                backgroundColor: 'rgb(36,50,114)',
-                borderColor: 'rgb(36,50,114)',
+                backgroundColor: 'turquoise',
+                borderColor: 'turquoise',
                 borderWidth: 3
             },
                 {
                     label: 'Goal',
                     data: goal,
-                    backgroundColor: 'rgb(255,0,0)',
-                    borderColor: 'rgb(255,0,0)',
+                    backgroundColor: '#ffffff',
+                    borderColor: 'white',
                     borderWidth: 3
                 }]
         },
         options: {
+
             elements: {
                 line: {
                     tension: 0.5

@@ -49,7 +49,7 @@ nav {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     border: 2px solid var(--logo-color);
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 10px;
     background-color:#1e1e1e ;
     margin: 0 10px;
 }
@@ -220,22 +220,25 @@ th {
     color: white;
 }
 .results-section {
-    background-color: var(--light-color);
+    background-color: #1e1e1e;
+    border-bottom: 2px solid turquoise;
+    border-top: 2px solid turquoise;
     padding: 20px;
     margin-top: 20px;
+
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .results-section h2 {
     font-size: 1.4em;
-    color: var(--main-color);
+    color: white;
     margin-bottom: 10px;
 }
 
 .results-section p {
     font-size: 1.2em;
-    color: var(--accent-color);
+    color: white;
 }
 
 
