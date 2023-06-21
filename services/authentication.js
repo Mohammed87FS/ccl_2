@@ -2,11 +2,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-async function checkPassword(password, hash){
-    let pw = await bcrypt.compare(password, hash)
+// Function to check if the provided password matches the hash
+async function checkPassword(password, hash) {
+    let pw = await bcrypt.compare(password, hash);
     return pw;
 }
-async function authenticateUser(req, users, res){
+
+// Function to authenticate the user during login
+async function authenticateUser(req, users, res) {
     const { email, password } = req.body;
     const user = users.find(u => {
         return u.email === email;
@@ -21,7 +24,7 @@ async function authenticateUser(req, users, res){
                 userGoalExercise: user.daily_exercise_minutes_goal
             },
             ACCESS_TOKEN_SECRET,
-            { expiresIn: '30m'}
+            { expiresIn: '30m' }
         );
         res.cookie('accessToken', accessToken);
 
@@ -32,11 +35,7 @@ async function authenticateUser(req, users, res){
     }
 }
 
-
-
-
-
-
+// Middleware function to authenticate JWT (JSON Web Token)
 function authenticateJWT(req, res, next) {
     const token = req.cookies['accessToken'];
 
@@ -52,7 +51,6 @@ function authenticateJWT(req, res, next) {
         res.sendStatus(401);
     }
 }
-
 
 module.exports = {
     authenticateUser,

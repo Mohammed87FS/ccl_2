@@ -1,8 +1,6 @@
-
 const uuid = require('uuid');
 
 const jwt = require('jsonwebtoken');
-// In your controller
 
 const indexModel = require('../models/indexModel');
 const bcrypt = require('bcrypt');
@@ -10,13 +8,11 @@ const bcrypt = require('bcrypt');
 const fetch = require('node-fetch');
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
-// ...
 
 require('dotenv').config()
 
 
-// indexController.js
-// indexController.js
+
 
 exports.getNutritionDetails = async (req, res, next) => {
     try {
@@ -58,10 +54,6 @@ exports.getNutritionDetails = async (req, res, next) => {
     }
 };
 
-
-
-
-// ...
 
 exports.submitUser = (req, res, next) => {
     if (!req.files || !req.files.picture) {
@@ -159,11 +151,9 @@ exports.getUserCalories = async (req, res, next) => {
         const userId = req.user.id;
         const caloriesIntake = await indexModel.getUserCalorieIntake(userId);
         const dailyCalorieGoal = await indexModel.getUserDailyCalorieGoal(userId);
-        console.log(dailyCalorieGoal)
-        console.dir(dailyCalorieGoal);
 
-        console.log("Calories data: ", caloriesIntake); // This line will print the calorie data to your console
-        console.log("Daily calorie goal: ", dailyCalorieGoal); // This will print the daily calorie goal to your console
+
+
         res.render('chart', {calories: caloriesIntake, dailyCalorieGoal: dailyCalorieGoal});
     } catch (error) {
         console.error('Error:', error);
@@ -197,7 +187,7 @@ exports.getExercise = async (req, res, next) => {
         const exerciseData = await indexModel.getExercise(parseInt(req.params.id));
         const exercise = exerciseData[0];
         console.log("Exercise:", exercise);
-        console.log("Exercise ID:", exercise.id);
+
     } catch (error) {
         next(error);
     }
@@ -216,12 +206,12 @@ exports.getUser = async (req, res, next) => {
 };
 
 exports.isloged = (req, res, next) => {
-    console.log( ACCESS_TOKEN_SECRET );
+
     const token = req.cookies['accessToken'];
-    console.log(token);
+
     if (!token) {
-        console.log("!token");
-        return res.redirect("/login") // Add return here
+
+        return res.redirect("/login")
     }
     try {
         const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
@@ -319,7 +309,7 @@ exports.editExercise = (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     try {
         const userId = req.params.id;
-        console.log("fdfbdv");
+
         await indexModel.deleteUser(userId);
         res.redirect('/logout');
     } catch (error) {
