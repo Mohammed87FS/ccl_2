@@ -125,7 +125,7 @@ exports.getRegisterPage = (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            next(err); // forward error to the next middleware
+            next(err);
         });
 };
 
@@ -142,7 +142,7 @@ exports.getWorkoutPlansPage = async (req, res, next) => {
         res.render('workoutPlans', {exercises: exercises});
     } catch (error) {
         console.error('Error:', error);
-        next(error); // forward error to the next middleware
+        next(error);
     }
 };
 
