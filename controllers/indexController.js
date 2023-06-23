@@ -12,7 +12,8 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 require('dotenv').config()
 
 
-
+const apiID="c5aa3fc0";
+const apiKey="430a8c9b51c22317a5a3c56a6cb74901";
 
 exports.getNutritionDetails = async (req, res, next) => {
     try {
@@ -21,7 +22,7 @@ exports.getNutritionDetails = async (req, res, next) => {
         // Convert string of ingredients to an array
         const ingredients = ingr.split('\n');
 
-        const response = await fetch(`https://api.edamam.com/api/nutrition-details?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`, {
+        const response = await fetch(`https://api.edamam.com/api/nutrition-details?app_id=${apiID}&app_key=${apiKey}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
